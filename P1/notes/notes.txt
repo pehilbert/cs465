@@ -1,0 +1,58 @@
+Every class in Java inherits from class Object
+
+Network Programming in Java
+===========================
+
+Server
+------
+ServerSocket(port) -> constructor of server socket
+serverSocket.accept() -> blocking, returns client socket when they connect
+
+Client
+------
+Socket(IP, port) -> constructor of client socket
+^^ IP can be human-readable, like "www.nau.edu"
+
+How to work with sockets
+------------------------
+getInputStream() -> reading data from network
+getOutputStream() -> send data to network
+^^ These are the equivalent of reading and writing in C, but it takes care of everything for you, and you can even send whole objects
+
+These methods return a primitive byte stream, but they can be passed into different classes which represent streams of different things such as objects
+
+Resources
+---------
+docs.oracle.com/javase/8/docs/api
+docs.oracle.com/javase/tutorial/index.html
+
+Structure
+---------
+
+chat
+- ChatClient.java (Peter)
+  Receiver.java (Claire)
+  ReceiverWorker.java (Claire)
+  Sender.java (Peter)
+  ChatServer.java (Chaz)
+  ChatServerWorker.java (Chaz)
+  NodeInfo.java (needs to have equals method below) (Peter)
+
+utils
+- PropertyHandler.java
+- NetworkUtilities.java
+
+message
+- Message.java (provided)
+  MessageTypes.java (provided)
+
+@Override
+public Boolean equals(Object other) {
+    String otherIP = ((NodeInfo) other).getAddress();
+    int otherPort = ((NodeInfo) other).getPort();
+    
+    return this.ip.equals(otherIP) && this.port == otherPort;
+}
+
+Server participants list definition:
+public static List<NodeInfo> participants = new ArrayList<>();
