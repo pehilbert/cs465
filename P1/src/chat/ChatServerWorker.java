@@ -37,7 +37,7 @@ public class ChatServerWorker extends Thread implements MessageTypes{
         {
             // get object streams
             writeToNet = new ObjectOutputStream(chatConnection.getOutputStream());
-            readFromNet = new ObjectInputStreamStream(chatConnection.getInputStream());
+            readFromNet = new ObjectInputStream(chatConnection.getInputStream());
 
             // read message
             message = (Message) readFromNet.readObject();
