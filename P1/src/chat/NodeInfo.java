@@ -34,4 +34,12 @@ public class NodeInfo {
     {
         return name;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        String otherIP = ((NodeInfo) other).getIp();
+        int otherPort = ((NodeInfo) other).getPort();
+        
+        return this.ip.equals(otherIP) && this.port == otherPort;
+    }
 }
