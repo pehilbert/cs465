@@ -7,9 +7,6 @@ import java.net.Socket;
 
 import java.util.Iterator;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import message.Message;
 import message.MessageTypes;
 

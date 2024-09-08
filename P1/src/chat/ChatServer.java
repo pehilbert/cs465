@@ -4,9 +4,6 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import utils.NetworkUtilities;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import utils.PropertyHandler;
 import java.util.Properties;
 
