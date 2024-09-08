@@ -10,6 +10,9 @@ import java.util.logging.Logger;
 import utils.PropertyHandler;
 import java.util.Properties;
 
+import java.util.List;
+import java.util.ArrayList;
+
 /*
     Chat server class
     Will read and confgiure information as well as start up the 
@@ -60,7 +63,7 @@ public class ChatServer implements Runnable{
         try
         {
             serverSocket = new ServerSocket(port);
-            System.out.println("ChatServer listening on" + NetworkUtilities.getMyIp() + ":" + port);
+            System.out.println("ChatServer listening on" + NetworkUtilities.getMyIP() + ":" + port);
         }
         catch(IOException ex)
         {
