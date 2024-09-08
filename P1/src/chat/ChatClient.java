@@ -3,6 +3,10 @@ package chat;
 import java.lang.ArrayIndexOutOfBoundsException;
 import java.io.IOException;
 
+import java.util.Properties;
+import utils.PropertyHandler;
+import utils.NetworkUtilities;
+
 public class ChatClient implements Runnable {
     static Receiver receiver = null;
     static Sender sender = null;
@@ -16,7 +20,7 @@ public class ChatClient implements Runnable {
 
         try 
         {
-            Properties properties = new PropertyHandler(propertiesFile);
+            properties = new PropertyHandler(propertiesFile);
         } 
         catch (IOException e) 
         {

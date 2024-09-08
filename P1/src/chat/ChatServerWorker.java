@@ -7,9 +7,6 @@ import java.net.Socket;
 
 import java.util.Iterator;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import message.Message;
 import message.MessageTypes;
 
@@ -66,7 +63,7 @@ public class ChatServerWorker extends Thread implements MessageTypes{
                 while(participantIterator.hasNext())
                 {
                     participantInfo = participantIterator.next();
-                    System.out.print(participantInfo.name = " ");
+                    System.out.print(participantInfo.getName());
                 }
                 System.out.println();
                 break;
@@ -85,14 +82,14 @@ public class ChatServerWorker extends Thread implements MessageTypes{
                     System.err.println(leavingParticipantInfo.getName() + "not found");
                 }
 
-                System.out.print(joiningParticipantNodeInfo.getName()+ "left. Remaining participants: ");
+                System.out.print(leavingParticipantInfo.getName()+ "left. Remaining participants: ");
 
                 participantIterator = ChatServer.participants.iterator();
 
                 while(participantIterator.hasNext())
                 {
                     participantInfo = participantIterator.next();
-                    System.out.print(participantInfo.name = " ");
+                    System.out.print(participantInfo.getName());
                 }
                 System.out.println();
                 break;
@@ -108,7 +105,7 @@ public class ChatServerWorker extends Thread implements MessageTypes{
                     try
                     {
                         // connect to client
-                        chatConnection = new Socket(participantInfo.address, participantInfo.port);
+                        chatConnection = new Socket(participantInfo.getIp(), participantInfo.getPort());
 
                         // open object stream
                         writeToNet = new ObjectOutputStream(chatConnection.getOutputStream());
@@ -142,7 +139,7 @@ public class ChatServerWorker extends Thread implements MessageTypes{
                     try
                     {
                         // connect to client
-                        chatConnection = new Socket(participantInfo.address, participantInfo.port);
+                        chatConnection = new Socket(participantInfo.getIp(), participantInfo.getPort());
 
                         // open object stream
                         writeToNet = new ObjectOutputStream(chatConnection.getOutputStream());

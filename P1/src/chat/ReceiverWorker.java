@@ -4,15 +4,13 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import message.Message;
 import static message.MessageTypes.NOTE;
 import static message.MessageTypes.SHUTDOWN;
 
 public class ReceiverWorker extends Thread
 {
-    Socekt serverConnection = null;
+    Socket serverConnection = null;
 
     ObjectInputStream readFromNet = null;
     ObjectOutputStream writeToNet = null;

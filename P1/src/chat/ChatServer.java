@@ -4,11 +4,11 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import utils.NetworkUtilities;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import utils.PropertyHandler;
 import java.util.Properties;
+
+import java.util.List;
+import java.util.ArrayList;
 
 /*
     Chat server class
@@ -60,7 +60,7 @@ public class ChatServer implements Runnable{
         try
         {
             serverSocket = new ServerSocket(port);
-            System.out.println("ChatServer listening on" + NetworkUtilities.getMyIp() + ":" + port);
+            System.out.println("ChatServer listening on" + NetworkUtilities.getMyIP() + ":" + port);
         }
         catch(IOException ex)
         {
