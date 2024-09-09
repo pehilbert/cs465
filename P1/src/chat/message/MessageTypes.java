@@ -1,4 +1,4 @@
-package message;
+package chat.message;
 
 /**
  * Interface [MessageTypes] Defines the different message types used in the application.

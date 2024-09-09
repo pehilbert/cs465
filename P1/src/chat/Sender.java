@@ -6,8 +6,8 @@ import java.io.ObjectOutputStream;
 import java.util.Scanner;
 import java.net.Socket;
 
-import message.MessageTypes;
-import message.Message;
+import chat.message.MessageTypes;
+import chat.message.Message;
 
 public class Sender extends Thread implements MessageTypes 
 {
@@ -63,7 +63,7 @@ public class Sender extends Thread implements MessageTypes
                 // connect to server and send join message
                 try
                 {
-                    serverConnection = new Socket(ChatClient.serverNodeInfo.getIp(), ChatClient.serverNodeInfo.getPort());
+                    serverConnection = new Socket(ChatClient.serverNodeInfo.getAddress(), ChatClient.serverNodeInfo.getPort());
 
                     readFromNet = new ObjectInputStream(serverConnection.getInputStream());
                     writeToNet = new ObjectOutputStream(serverConnection.getOutputStream());
@@ -100,7 +100,7 @@ public class Sender extends Thread implements MessageTypes
                 // connect to server and send leave message
                 try
                 {
-                    serverConnection = new Socket(ChatClient.serverNodeInfo.getIp(), ChatClient.serverNodeInfo.getPort());
+                    serverConnection = new Socket(ChatClient.serverNodeInfo.getAddress(), ChatClient.serverNodeInfo.getPort());
 
                     readFromNet = new ObjectInputStream(serverConnection.getInputStream());
                     writeToNet = new ObjectOutputStream(serverConnection.getOutputStream());
@@ -127,7 +127,7 @@ public class Sender extends Thread implements MessageTypes
                     // connect to server and send shutdown message
                     try
                     {
-                        serverConnection = new Socket(ChatClient.serverNodeInfo.getIp(), ChatClient.serverNodeInfo.getPort());
+                        serverConnection = new Socket(ChatClient.serverNodeInfo.getAddress(), ChatClient.serverNodeInfo.getPort());
 
                         readFromNet = new ObjectInputStream(serverConnection.getInputStream());
                         writeToNet = new ObjectOutputStream(serverConnection.getOutputStream());
@@ -161,7 +161,7 @@ public class Sender extends Thread implements MessageTypes
                 {
                     try
                     {
-                        serverConnection = new Socket(ChatClient.serverNodeInfo.getIp(), ChatClient.serverNodeInfo.getPort());
+                        serverConnection = new Socket(ChatClient.serverNodeInfo.getAddress(), ChatClient.serverNodeInfo.getPort());
 
                         readFromNet = new ObjectInputStream(serverConnection.getInputStream());
                         writeToNet = new ObjectOutputStream(serverConnection.getOutputStream());
@@ -199,7 +199,7 @@ public class Sender extends Thread implements MessageTypes
                 // connect to server and send note
                 try
                 {
-                    serverConnection = new Socket(ChatClient.serverNodeInfo.getIp(), ChatClient.serverNodeInfo.getPort());
+                    serverConnection = new Socket(ChatClient.serverNodeInfo.getAddress(), ChatClient.serverNodeInfo.getPort());
 
                     readFromNet = new ObjectInputStream(serverConnection.getInputStream());
                     writeToNet = new ObjectOutputStream(serverConnection.getOutputStream());

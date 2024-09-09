@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import message.Message;
-import static message.MessageTypes.NOTE;
-import static message.MessageTypes.SHUTDOWN;
+import chat.message.Message;
+import static chat.message.MessageTypes.NOTE;
+import static chat.message.MessageTypes.SHUTDOWN;
 
 public class ReceiverWorker extends Thread
 {

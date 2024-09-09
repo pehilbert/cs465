@@ -7,8 +7,8 @@ import java.net.Socket;
 
 import java.util.Iterator;
 
-import message.Message;
-import message.MessageTypes;
+import chat.message.Message;
+import chat.message.MessageTypes;
 
 public class ChatServerWorker extends Thread implements MessageTypes{
 
@@ -105,7 +105,7 @@ public class ChatServerWorker extends Thread implements MessageTypes{
                     try
                     {
                         // connect to client
-                        chatConnection = new Socket(participantInfo.getIp(), participantInfo.getPort());
+                        chatConnection = new Socket(participantInfo.getAddress(), participantInfo.getPort());
 
                         // open object stream
                         writeToNet = new ObjectOutputStream(chatConnection.getOutputStream());
@@ -139,7 +139,7 @@ public class ChatServerWorker extends Thread implements MessageTypes{
                     try
                     {
                         // connect to client
-                        chatConnection = new Socket(participantInfo.getIp(), participantInfo.getPort());
+                        chatConnection = new Socket(participantInfo.getAddress(), participantInfo.getPort());
 
                         // open object stream
                         writeToNet = new ObjectOutputStream(chatConnection.getOutputStream());
