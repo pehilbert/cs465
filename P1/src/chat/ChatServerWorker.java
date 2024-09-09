@@ -30,6 +30,8 @@ public class ChatServerWorker extends Thread implements MessageTypes{
         NodeInfo participantInfo = null;
         Iterator <NodeInfo> participantIterator;
 
+        System.out.println("stuff should be happening here");
+
         try
         {
             // get object streams
