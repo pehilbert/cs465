@@ -1,45 +1,46 @@
 package chat;
 
-public class NodeInfo {
-    private String ip;
-    private int port;
-    private String name;
+import java.io.Serializable;
+
+public class NodeInfo implements Serializable {
+    String address;
+    int port;
+    String name = null;
 
     // Constructor
-    public NodeInfo(String inIp, int inPort, String inName) 
+    public NodeInfo(String address, int port, String name) 
     {
-        ip = inIp;
-        port = inPort;
-        name = inName;
+        this.address = address;
+        this.port = port;
+        this.name = name;
     }
 
-    public NodeInfo(String inIp, int inPort)
+    public NodeInfo(String address, int port)
     {
-        ip = inIp;
-        port = inPort;
+        this(address, port, null);
     }
 
     // Getter methods
-    public String getIp() 
+    public String getAddress() 
     {
-        return ip;
+        return this.address;
     }
 
     public int getPort() 
     {
-        return port;
+        return this.port;
     }
 
     public String getName() 
     {
-        return name;
+        return this.name;
     }
 
     @Override
     public boolean equals(Object other) {
-        String otherIP = ((NodeInfo) other).getIp();
+        String otherIP = ((NodeInfo) other).getAddress();
         int otherPort = ((NodeInfo) other).getPort();
         
-        return this.ip.equals(otherIP) && this.port == otherPort;
+        return otherIP.equals(this.address) && (this.port == otherPort);
     }
 }

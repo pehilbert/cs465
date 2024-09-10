@@ -6,8 +6,8 @@ import java.io.ObjectOutputStream;
 import java.util.Scanner;
 import java.net.Socket;
 
-import message.MessageTypes;
-import message.Message;
+import chat.message.MessageTypes;
+import chat.message.Message;
 
 public class Sender extends Thread implements MessageTypes 
 {
@@ -63,7 +63,7 @@ public class Sender extends Thread implements MessageTypes
                 // connect to server and send join message
                 try
                 {
-                    serverConnection = new Socket(ChatClient.serverNodeInfo.getIp(), ChatClient.serverNodeInfo.getPort());
+                    serverConnection = new Socket(ChatClient.serverNodeInfo.getAddress(), ChatClient.serverNodeInfo.getPort());
 
                     readFromNet = new ObjectInputStream(serverConnection.getInputStream());
                     writeToNet = new ObjectOutputStream(serverConnection.getOutputStream());
@@ -100,7 +100,7 @@ public class Sender extends Thread implements MessageTypes
                 // connect to server and send leave message
                 try
                 {
-                    serverConnection = new Socket(ChatClient.serverNodeInfo.getIp(), ChatClient.serverNodeInfo.getPort());
+                    serverConnection = new Socket(ChatClient.serverNodeInfo.getAddress(), ChatClient.serverNodeInfo.getPort());
 
                     readFromNet = new ObjectInputStream(serverConnection.getInputStream());
                     writeToNet = new ObjectOutputStream(serverConnection.getOutputStream());
@@ -118,6 +118,41 @@ public class Sender extends Thread implements MessageTypes
                 // everything went well if we got here, so set has joined flag to false
                 hasJoined = false;
             }
+            else if (inputLine.startsWith("SHUTDOWN ALL"))
+            {
+                // the user cannot shutdown all unless they're in the chat
+                if (!hasJoined)
+                {
+                    System.out.println("You are not in the chat yet!");
+                    continue;
+                }
+
+                // connect to server and send shutdown all message if possible
+                if (ChatClient.serverNodeInfo != null)
+                {
+                    try
+                    {
+                        serverConnection = new Socket(ChatClient.serverNodeInfo.getAddress(), ChatClient.serverNodeInfo.getPort());
+
+                        readFromNet = new ObjectInputStream(serverConnection.getInputStream());
+                        writeToNet = new ObjectOutputStream(serverConnection.getOutputStream());
+
+                        writeToNet.writeObject(new Message(MessageTypes.SHUTDOWN_ALL, ChatClient.myNodeInfo));
+
+                        serverConnection.close();
+                    } 
+                    catch (IOException e)
+                    {
+                        System.out.println("Error connecting to server");
+                        System.exit(1);
+                    }
+                }
+
+                // // if all went well, exit successfully
+                // System.out.println("Shutting down...");
+                // System.exit(0);
+            }
+
             else if (inputLine.startsWith("SHUTDOWN"))
             {
                 // if the user is in the chat, we must let the server know, otherwise this is not needed
@@ -127,7 +162,7 @@ public class Sender extends Thread implements MessageTypes
                     // connect to server and send shutdown message
                     try
                     {
-                        serverConnection = new Socket(ChatClient.serverNodeInfo.getIp(), ChatClient.serverNodeInfo.getPort());
+                        serverConnection = new Socket(ChatClient.serverNodeInfo.getAddress(), ChatClient.serverNodeInfo.getPort());
 
                         readFromNet = new ObjectInputStream(serverConnection.getInputStream());
                         writeToNet = new ObjectOutputStream(serverConnection.getOutputStream());
@@ -147,40 +182,7 @@ public class Sender extends Thread implements MessageTypes
                 System.out.println("Shutting down...");
                 System.exit(0);
             }
-            else if (inputLine.startsWith("SHUTDOWN ALL"))
-            {
-                // the user cannot shutdown all unless they're in the chat
-                if (!hasJoined)
-                {
-                    System.out.println("You are not in the chat yet!");
-                    continue;
-                }
-
-                // connect to server and send shutdown all message if possible
-                if (ChatClient.serverNodeInfo != null)
-                {
-                    try
-                    {
-                        serverConnection = new Socket(ChatClient.serverNodeInfo.getIp(), ChatClient.serverNodeInfo.getPort());
-
-                        readFromNet = new ObjectInputStream(serverConnection.getInputStream());
-                        writeToNet = new ObjectOutputStream(serverConnection.getOutputStream());
-
-                        writeToNet.writeObject(new Message(MessageTypes.SHUTDOWN_ALL, ChatClient.myNodeInfo));
-
-                        serverConnection.close();
-                    } 
-                    catch (IOException e)
-                    {
-                        System.out.println("Error connecting to server");
-                        System.exit(1);
-                    }
-                }
-
-                // if all went well, exit successfully
-                System.out.println("Shutting down...");
-                System.exit(0);
-            }
+            
             else
             {
                 if (!hasJoined)
@@ -199,7 +201,7 @@ public class Sender extends Thread implements MessageTypes
                 // connect to server and send note
                 try
                 {
-                    serverConnection = new Socket(ChatClient.serverNodeInfo.getIp(), ChatClient.serverNodeInfo.getPort());
+                    serverConnection = new Socket(ChatClient.serverNodeInfo.getAddress(), ChatClient.serverNodeInfo.getPort());
 
                     readFromNet = new ObjectInputStream(serverConnection.getInputStream());
                     writeToNet = new ObjectOutputStream(serverConnection.getOutputStream());

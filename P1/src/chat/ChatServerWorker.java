@@ -7,8 +7,8 @@ import java.net.Socket;
 
 import java.util.Iterator;
 
-import message.Message;
-import message.MessageTypes;
+import chat.message.Message;
+import chat.message.MessageTypes;
 
 public class ChatServerWorker extends Thread implements MessageTypes{
 
@@ -46,6 +46,8 @@ public class ChatServerWorker extends Thread implements MessageTypes{
             System.out.println(ex.toString());
             System.exit(1);
         }
+
+        //System.out.println("Message Type" + message.getType() ) ;
 
         switch(message.getType())
         {
@@ -105,7 +107,7 @@ public class ChatServerWorker extends Thread implements MessageTypes{
                     try
                     {
                         // connect to client
-                        chatConnection = new Socket(participantInfo.getIp(), participantInfo.getPort());
+                        chatConnection = new Socket(participantInfo.getAddress(), participantInfo.getPort());
 
                         // open object stream
                         writeToNet = new ObjectOutputStream(chatConnection.getOutputStream());
@@ -130,16 +132,20 @@ public class ChatServerWorker extends Thread implements MessageTypes{
                 // display note
                 System.out.println((String) message.getContent());
 
+                // SYstem.out.println((String)message.)
+
                 // run through all the particiapants and send each a note
                 participantIterator = ChatServer.participants.iterator();
+
                 while(participantIterator.hasNext())
                 {
+
                     participantInfo = participantIterator.next();
                     
                     try
                     {
                         // connect to client
-                        chatConnection = new Socket(participantInfo.getIp(), participantInfo.getPort());
+                        chatConnection = new Socket(participantInfo.getAddress(), participantInfo.getPort());
 
                         // open object stream
                         writeToNet = new ObjectOutputStream(chatConnection.getOutputStream());
@@ -148,12 +154,15 @@ public class ChatServerWorker extends Thread implements MessageTypes{
                         // write message
                         writeToNet.writeObject(message);
 
+                        //System.out.println("Sent msg to " + (String)participantInfo.getName());
+
                         chatConnection.close();
                     }
                     catch(IOException ex)
                     {
                         System.out.println(ex.toString());
                     }
+
                 }
                 break;
 
