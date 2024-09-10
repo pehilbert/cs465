@@ -154,7 +154,7 @@ public class ChatServerWorker extends Thread implements MessageTypes{
                         // write message
                         writeToNet.writeObject(message);
 
-                        System.out.println("Sent msg to " + (String)participantInfo.getName());
+                        //System.out.println("Sent msg to " + (String)participantInfo.getName());
 
                         chatConnection.close();
                     }
