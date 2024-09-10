@@ -118,35 +118,6 @@ public class Sender extends Thread implements MessageTypes
                 // everything went well if we got here, so set has joined flag to false
                 hasJoined = false;
             }
-            else if (inputLine.startsWith("SHUTDOWN"))
-            {
-                // if the user is in the chat, we must let the server know, otherwise this is not needed
-                // (this is essentially the same thing as leaving the chat)
-                if (hasJoined && ChatClient.serverNodeInfo != null)
-                {
-                    // connect to server and send shutdown message
-                    try
-                    {
-                        serverConnection = new Socket(ChatClient.serverNodeInfo.getAddress(), ChatClient.serverNodeInfo.getPort());
-
-                        readFromNet = new ObjectInputStream(serverConnection.getInputStream());
-                        writeToNet = new ObjectOutputStream(serverConnection.getOutputStream());
-
-                        writeToNet.writeObject(new Message(MessageTypes.SHUTDOWN, ChatClient.myNodeInfo));
-
-                        serverConnection.close();
-                    } 
-                    catch (IOException e)
-                    {
-                        System.out.println("Error connecting to server");
-                        System.exit(1);
-                    }
-                }
-
-                // if all went well, exit the program successfully
-                System.out.println("Shutting down...");
-                System.exit(0);
-            }
             else if (inputLine.startsWith("SHUTDOWN ALL"))
             {
                 // the user cannot shutdown all unless they're in the chat
@@ -177,10 +148,41 @@ public class Sender extends Thread implements MessageTypes
                     }
                 }
 
-                // if all went well, exit successfully
+                // // if all went well, exit successfully
+                // System.out.println("Shutting down...");
+                // System.exit(0);
+            }
+
+            else if (inputLine.startsWith("SHUTDOWN"))
+            {
+                // if the user is in the chat, we must let the server know, otherwise this is not needed
+                // (this is essentially the same thing as leaving the chat)
+                if (hasJoined && ChatClient.serverNodeInfo != null)
+                {
+                    // connect to server and send shutdown message
+                    try
+                    {
+                        serverConnection = new Socket(ChatClient.serverNodeInfo.getAddress(), ChatClient.serverNodeInfo.getPort());
+
+                        readFromNet = new ObjectInputStream(serverConnection.getInputStream());
+                        writeToNet = new ObjectOutputStream(serverConnection.getOutputStream());
+
+                        writeToNet.writeObject(new Message(MessageTypes.SHUTDOWN, ChatClient.myNodeInfo));
+
+                        serverConnection.close();
+                    } 
+                    catch (IOException e)
+                    {
+                        System.out.println("Error connecting to server");
+                        System.exit(1);
+                    }
+                }
+
+                // if all went well, exit the program successfully
                 System.out.println("Shutting down...");
                 System.exit(0);
             }
+            
             else
             {
                 if (!hasJoined)

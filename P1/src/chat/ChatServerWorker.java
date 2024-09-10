@@ -47,6 +47,8 @@ public class ChatServerWorker extends Thread implements MessageTypes{
             System.exit(1);
         }
 
+        //System.out.println("Message Type" + message.getType() ) ;
+
         switch(message.getType())
         {
             case JOIN:
@@ -130,10 +132,14 @@ public class ChatServerWorker extends Thread implements MessageTypes{
                 // display note
                 System.out.println((String) message.getContent());
 
+                // SYstem.out.println((String)message.)
+
                 // run through all the particiapants and send each a note
                 participantIterator = ChatServer.participants.iterator();
+
                 while(participantIterator.hasNext())
                 {
+
                     participantInfo = participantIterator.next();
                     
                     try
@@ -148,12 +154,15 @@ public class ChatServerWorker extends Thread implements MessageTypes{
                         // write message
                         writeToNet.writeObject(message);
 
+                        System.out.println("Sent msg to " + (String)participantInfo.getName());
+
                         chatConnection.close();
                     }
                     catch(IOException ex)
                     {
                         System.out.println(ex.toString());
                     }
+
                 }
                 break;
 
