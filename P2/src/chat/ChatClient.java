@@ -5,9 +5,12 @@ import utils.NetworkUtilities;
 import utils.PropertyHandler;
 import java.util.Properties;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.net.Socket;
 
 public class ChatClient implements Runnable {
     public static List<NodeInfo> participants = new ArrayList<NodeInfo>();
@@ -51,14 +54,34 @@ public class ChatClient implements Runnable {
         myNodeInfo = new NodeInfo(NetworkUtilities.getMyIP(), myPort, myName);
     }
 
+    private static String nodeToString(NodeInfo node) {
+        return node.getName() + " | " + node.getAddress() + ":" + Integer.toString(node.getPort());
+    }
+
     // TODO: send the given message to the chat node
     public static void sendMessage(NodeInfo recipient, Message msg) {
+        try {
+            Socket sendSocket = new Socket(recipient.getAddress(), recipient.getPort());
 
+            sendSocket.getInputStream();
+            ObjectOutputStream writeToNet = (ObjectOutputStream)sendSocket.getOutputStream();
+
+            writeToNet.writeObject(msg);
+
+            sendSocket.close();
+        } catch (IOException e) {
+            System.out.println("Error sending message to " + nodeToString(recipient));
+        }
     }
 
     // TODO: send to all participants in the list (use sendMessage)
     public static void sendToAll(Message msg) {
+        Iterator<NodeInfo> iter = participants.iterator();
 
+        while (iter.hasNext()) {
+            NodeInfo participant = iter.next();
+            sendMessage(participant, msg);
+        }
     }
 
     @Override
