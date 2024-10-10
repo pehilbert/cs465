@@ -57,9 +57,11 @@ public class ChatClient implements Runnable {
     private static String nodeToString(NodeInfo node) {
         return node.getName() + " | " + node.getAddress() + ":" + Integer.toString(node.getPort());
     }
-    
+
     public static void sendMessage(NodeInfo recipient, Message msg) {
         try {
+            System.out.println("Trying to send a message of type " + Integer.toString(msg.getType()) + " to " + nodeToString(recipient));
+
             Socket sendSocket = new Socket(recipient.getAddress(), recipient.getPort());
 
             sendSocket.getInputStream();
@@ -68,6 +70,8 @@ public class ChatClient implements Runnable {
             writeToNet.writeObject(msg);
 
             sendSocket.close();
+
+            System.out.println("Message send to " + nodeToString(recipient));
         } catch (IOException e) {
             System.out.println("Error sending message to " + nodeToString(recipient));
         }
