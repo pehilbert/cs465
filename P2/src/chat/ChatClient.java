@@ -15,7 +15,6 @@ import java.net.Socket;
 public class ChatClient implements Runnable {
     public static List<NodeInfo> participants = new ArrayList<NodeInfo>();
     public static NodeInfo myNodeInfo;
-
     static Receiver receiver = null;
     static Sender sender = null;
 
