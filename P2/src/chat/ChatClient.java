@@ -57,8 +57,7 @@ public class ChatClient implements Runnable {
     private static String nodeToString(NodeInfo node) {
         return node.getName() + " | " + node.getAddress() + ":" + Integer.toString(node.getPort());
     }
-
-    // TODO: send the given message to the chat node
+    
     public static void sendMessage(NodeInfo recipient, Message msg) {
         try {
             Socket sendSocket = new Socket(recipient.getAddress(), recipient.getPort());
@@ -74,7 +73,6 @@ public class ChatClient implements Runnable {
         }
     }
 
-    // TODO: send to all participants in the list (use sendMessage)
     public static void sendToAll(Message msg) {
         Iterator<NodeInfo> iter = participants.iterator();
 
