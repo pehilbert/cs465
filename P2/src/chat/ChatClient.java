@@ -71,19 +71,23 @@ public class ChatClient implements Runnable {
 
             sendSocket.close();
 
-            System.out.println("Message send to " + nodeToString(recipient));
+            System.out.println("Message sent to " + nodeToString(recipient));
         } catch (IOException e) {
             System.out.println("Error sending message to " + nodeToString(recipient));
         }
     }
 
     public static void sendToAll(Message msg) {
+        System.out.println("Sending message of type " + Integer.toString(msg.getType()) + " to all participants");
+
         Iterator<NodeInfo> iter = participants.iterator();
 
         while (iter.hasNext()) {
             NodeInfo participant = iter.next();
             sendMessage(participant, msg);
         }
+
+        System.out.println("Finished sending message of type " + Integer.toString(msg.getType()) + " to all participants");
     }
 
     @Override
