@@ -30,12 +30,13 @@ public class Sender extends Thread {
                 command = parts[0];
                 ip = parts[1];
                 port = parts[2];
-                Message message
+                Message message;
 
                 // if command != JOIN
                 if(command != "JOIN")
                 {
                     System.out.println("Please JOIN the chat before trying any other command");
+                    hasJoined = true;
                 }
                 else
                 {
@@ -58,6 +59,7 @@ public class Sender extends Thread {
                         message = new Message(LEAVE,myNodeInfo);
                         sendToAll(message);
                         // make joined flag false 
+                        hasJoined = false;
                         break;
 
                     // SHUTDOWN
