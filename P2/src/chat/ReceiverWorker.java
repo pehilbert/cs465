@@ -48,16 +48,29 @@ public class ReceiverWorker extends Thread implements MessageTypes {
             case JOIN:
             break;
 
-            case LEAVE:
-            break;
 
             case NOTE:
             break;
 
+
+            case LEAVE:
             case SHUTDOWN:
-            break;
+
+                // debug message
+                System.out.println("Received SHUTDOWN, removing participant.");
+
+                // remove person from the node
+                ChatClient.participants.remove( ( NodeInfo )message.getContent() );
+    
+                break;
 
             case SHUTDOWN_ALL:
+
+                // debug message 
+                System.out.println("Received SHUTDOWN ALL, terminating program.");
+
+                // Terminate processes
+                System.exit(0);
             break;
 
             case JOINED:
