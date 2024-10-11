@@ -46,10 +46,16 @@ public class ReceiverWorker extends Thread implements MessageTypes {
         switch (message.getType()) 
         {
             case JOIN:
+
+
+
             break;
 
 
             case NOTE:
+
+                System.out.println("Received NOTE");
+
             break;
 
 
