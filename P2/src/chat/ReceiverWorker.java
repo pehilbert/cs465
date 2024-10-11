@@ -46,6 +46,19 @@ public class ReceiverWorker extends Thread implements MessageTypes {
         switch (message.getType()) 
         {
             case JOIN:
+            try 
+            {
+                NodeInfo joinerNodeInfo = (NodeInfo)readFromNet.readObject();
+                ChatClient.sendMessage(joinerNodeInfo, new Message(INITIALIZE, (Object)ChatClient.participants));
+                ChatClient.sendToAll(new Message(JOINED, (Object)joinerNodeInfo));
+                ChatClient.participants.add(joinerNodeInfo);
+                participantConnection.close();
+            } 
+            catch (IOException | ClassNotFoundException e) 
+            {
+
+            }
+
             break;
 
 
