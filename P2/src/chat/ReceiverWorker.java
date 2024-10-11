@@ -60,7 +60,7 @@ public class ReceiverWorker extends Thread implements MessageTypes {
 
             case NOTE:
 
-                System.out.println("Received NOTE");
+                System.out.println(message.getContent());
 
             break;
 
