@@ -6,6 +6,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import chat.message.Message;
 import chat.message.MessageTypes;
+import java.util.ArrayList;
 
 public class ReceiverWorker extends Thread implements MessageTypes {
     Socket participantConnection;
@@ -29,6 +30,7 @@ public class ReceiverWorker extends Thread implements MessageTypes {
     }
 
     @Override
+    @SuppressWarnings("unchecked") // supress warnings about unchecked casts, since we know message content should only be of certain types
     public void run()
     {
         try
@@ -46,10 +48,22 @@ public class ReceiverWorker extends Thread implements MessageTypes {
         switch (message.getType()) 
         {
             case JOIN:
+                NodeInfo joinerNodeInfo = (NodeInfo)message.getContent();
+                System.out.println("Received JOIN from " + joinerNodeInfo.getName());
+
+                ChatClient.sendMessage(joinerNodeInfo, new Message(INITIALIZE, (Object)ChatClient.participants));
+                ChatClient.sendToAll(new Message(JOINED, (Object)joinerNodeInfo));
+
+                System.out.println("Adding " + joinerNodeInfo.getName() + " to list");
+                ChatClient.participants.add(joinerNodeInfo);
+
             break;
 
 
             case NOTE:
+
+                System.out.println(message.getContent());
+
             break;
 
 
@@ -57,7 +71,7 @@ public class ReceiverWorker extends Thread implements MessageTypes {
             case SHUTDOWN:
 
                 // debug message
-                System.out.println("Received SHUTDOWN, removing participant.");
+                System.out.println("Received LEAVE/SHUTDOWN, removing participant.");
 
                 // remove person from the node
                 ChatClient.participants.remove( ( NodeInfo )message.getContent() );
@@ -74,9 +88,22 @@ public class ReceiverWorker extends Thread implements MessageTypes {
             break;
 
             case JOINED:
+
+                // debug message
+                System.out.println("Received JOINED, adding participant.");
+
+                // add person
+                ChatClient.participants.add( ( NodeInfo )message.getContent() );
+
             break;
 
             case INITIALIZE:
+                // debug message
+                System.out.println("Received INITIALIZE, setting participants list.");
+
+                // add person
+                ChatClient.participants = (ArrayList<NodeInfo>)message.getContent();
+
             break;
 
             default:
