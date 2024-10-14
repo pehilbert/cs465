@@ -5,6 +5,7 @@ import java.util.Scanner;
 // import java.io.ObjectOutputStream;
 import chat.message.Message;
 import chat.message.MessageTypes;
+// import utils.PropertyHandler;
 
 public class Sender extends Thread implements MessageTypes {
     boolean hasJoined  = false;
@@ -28,6 +29,11 @@ public class Sender extends Thread implements MessageTypes {
             
             // check if user is not joined
             if (command.startsWith("JOIN")) {
+                if (hasJoined) {
+                    System.out.println("You have already joined!");
+                    continue;
+                }
+
                 String parts[] = command.split(" ",3);
                 
                 // if they provide an IP and port, actually send a JOIN message
@@ -49,6 +55,11 @@ public class Sender extends Thread implements MessageTypes {
             // LEAVE
             else if (command.equals("LEAVE"))
             {
+                if (!hasJoined) {
+                    System.out.println("You have to JOIN before you can LEAVE");
+                    continue;
+                }
+
                 // send all node with LEAVE message
                 message = new Message(LEAVE, ChatClient.myNodeInfo);
                 ChatClient.sendToAll(message);
@@ -62,6 +73,11 @@ public class Sender extends Thread implements MessageTypes {
             // SHUTDOWN
             else if (command.equals("SHUTDOWN"))
             {
+                if (!hasJoined) {
+                    System.out.println("You have to JOIN before you can SHUTDOWN");
+                    continue;
+                }
+
                 // send all node with SHUTDOWN message
                 message = new Message(SHUTDOWN, ChatClient.myNodeInfo);
                 ChatClient.sendToAll(message);
@@ -72,6 +88,11 @@ public class Sender extends Thread implements MessageTypes {
             // SHUTDOWN_ALL
             else if (command.equals("SHUTDOWN ALL"))
             {
+                if (!hasJoined) {
+                    System.out.println("You have to JOIN before you can SHUTDOWN ALL");
+                    continue;
+                }
+
                 // send all node with SHUTDOWN_ALL message
                 message = new Message(SHUTDOWN_ALL, ChatClient.myNodeInfo);
                 ChatClient.sendToAll(message);
@@ -82,6 +103,11 @@ public class Sender extends Thread implements MessageTypes {
             // Default
             else
             {
+                if (!hasJoined) {
+                    System.out.println("You have to JOIN before you can send a NOTE");
+                    continue;
+                }
+
                 // NOTE 
                 // send all node with NOTE message 
                 message = new Message(NOTE, ChatClient.myNodeInfo.getName() + command);
