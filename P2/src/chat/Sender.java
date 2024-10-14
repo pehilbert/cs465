@@ -26,28 +26,24 @@ public class Sender extends Thread implements MessageTypes {
             Message message;
             
             // check if user is not joined
-            if(!hasJoined)
-            {
+            if (command.startsWith("JOIN")) {
                 String parts[] = inputLine.split(" ",3);
-                command = parts[0];
-                ip = parts[1];
-                port = parts[2];
-
-                // if command != JOIN
-                if(!command.equals("JOIN"))
-                {
-                    System.out.println("Please JOIN the chat before trying any other command");
-                    hasJoined = true;
-                }
-                else
+                
+                // if they provide an IP and port, actually send a JOIN message
+                // otherwise, don't do anything except set hasJoined (for the first person)
+                if (parts.length == 3)
                 {
                     // send a JOIN to the node specified with ip and port
                     // create a node for recipient
+                    ip = parts[1];
+                    port = parts[2];
+
                     message = new Message(JOIN, ChatClient.myNodeInfo);
                     NodeInfo recpient = new NodeInfo(ip,Integer.parseInt(port),"");
                     ChatClient.sendMessage(recpient, message);
                 }
-                    
+
+                hasJoined = true;
             }
             // LEAVE
             else if (command.equals("LEAVE"))
