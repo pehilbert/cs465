@@ -7,7 +7,8 @@ import chat.message.Message;
 import chat.message.MessageTypes;
 // import utils.PropertyHandler;
 
-public class Sender extends Thread implements MessageTypes {
+public class Sender extends Thread implements MessageTypes 
+{
     boolean hasJoined  = false;
     Scanner userInput;
     String command = null;
@@ -16,7 +17,8 @@ public class Sender extends Thread implements MessageTypes {
 
 
     @Override
-    public void run() {
+    public void run() 
+    {
         System.out.println("Please JOIN the chat before trying any other command");
         System.out.println("The command to JOIN the chat is JOIN IP PORT, or if you are the first person, just type JOIN");
 

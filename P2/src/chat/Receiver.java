@@ -7,7 +7,8 @@ import java.net.ServerSocket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Receiver extends Thread {
+public class Receiver extends Thread 
+{
     static ServerSocket receiverSocket;
     
     // Constructor 

@@ -10,7 +10,8 @@ import java.io.Serializable;
  * 
  * @author Dr.-Ing. Wolf-Dieter Otte
  */
-public class Message implements MessageTypes, Serializable {
+public class Message implements MessageTypes, Serializable 
+{
     
     // type of message, types are defined in interface MessageTypes
     int type;
@@ -19,7 +20,8 @@ public class Message implements MessageTypes, Serializable {
 
     
     // constructor
-    public Message(int type, Object content) {
+    public Message(int type, Object content)
+    {
         this.type = type;
         this.content = content;
     }

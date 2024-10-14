@@ -8,7 +8,8 @@ import chat.message.Message;
 import chat.message.MessageTypes;
 import java.util.ArrayList;
 
-public class ReceiverWorker extends Thread implements MessageTypes {
+public class ReceiverWorker extends Thread implements MessageTypes 
+{
     Socket participantConnection;
     ObjectInputStream readFromNet = null;
     ObjectOutputStream writeToNet = null;
@@ -43,28 +44,32 @@ public class ReceiverWorker extends Thread implements MessageTypes {
             System.exit(1);
         }
         
-        // TODO: big ass switch statement
-        // Note: You can probably pull a lot from the old server and old client receiver worker
         switch (message.getType()) 
         {
             case JOIN:
+
+                // grab the sender's NodeInfo
                 NodeInfo joinerNodeInfo = (NodeInfo)message.getContent();
                 System.out.println("Received JOIN from " + joinerNodeInfo.getName());
 
+                // Send INITIALIZE message back to sender
                 ChatClient.sendMessage(joinerNodeInfo, new Message(INITIALIZE, (Object)ChatClient.participants));
+
+                // Forward JOINED message to other participants
                 ChatClient.sendToAll(new Message(JOINED, (Object)joinerNodeInfo));
 
+                // Add new person to our own list
                 System.out.println("Adding " + joinerNodeInfo.getName() + " to list");
                 ChatClient.participants.add(joinerNodeInfo);
 
-            break;
+                break;
 
 
             case NOTE:
 
+                // Just print the note
                 System.out.println(message.getContent());
-
-            break;
+                break;
 
 
             case LEAVE:
@@ -73,7 +78,7 @@ public class ReceiverWorker extends Thread implements MessageTypes {
                 // debug message
                 System.out.println("Received LEAVE/SHUTDOWN, removing participant.");
 
-                // remove person from the node
+                // remove person from the list
                 ChatClient.participants.remove( ( NodeInfo )message.getContent() );
     
                 break;
@@ -85,7 +90,8 @@ public class ReceiverWorker extends Thread implements MessageTypes {
 
                 // Terminate processes
                 System.exit(0);
-            break;
+
+                break;
 
             case JOINED:
 
@@ -95,21 +101,23 @@ public class ReceiverWorker extends Thread implements MessageTypes {
                 // add person
                 ChatClient.participants.add( ( NodeInfo )message.getContent() );
 
-            break;
+                break;
 
             case INITIALIZE:
+
                 // debug message
                 System.out.println("Received INITIALIZE, setting participants list.");
 
-                // add person
+                // set participants list
                 ChatClient.participants = (ArrayList<NodeInfo>)message.getContent();
 
-            break;
+                break;
 
             default:
-            // shouldn't be possible but whatever
-            System.out.println("ERROR: You somehow got to the default case?? You fucked up");
-            break;
+
+                // shouldn't be possible but whatever
+                System.out.println("ERROR: Somehow got to the default case.");
+                break;
         }
     }
 }

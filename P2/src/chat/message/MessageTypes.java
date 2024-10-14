@@ -6,7 +6,8 @@ package chat.message;
  * 
  * @author Dr.-Ing. Wolf-Dieter Otte
  */
-public interface MessageTypes {
+public interface MessageTypes 
+{
     
     public static final int JOIN         = 1;
     public static final int LEAVE        = 2;
