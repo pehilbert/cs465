@@ -18,7 +18,7 @@ public class Sender extends Thread implements MessageTypes {
     @Override
     public void run() {
         System.out.println("Please JOIN the chat before trying any other command");
-        System.out.println("The command to JOIN the chat is JOIN IP PORT");
+        System.out.println("The command to JOIN the chat is JOIN IP PORT, or if you are the first person, just type JOIN");
 
         while (true)
         {
