@@ -1,10 +1,12 @@
 package chat;
 
 import java.util.Scanner;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+// import java.io.ObjectInputStream;
+// import java.io.ObjectOutputStream;
+import chat.message.Message;
+import chat.message.MessageTypes;
 
-public class Sender extends Thread {
+public class Sender extends Thread implements MessageTypes {
     boolean hasJoined  = false;
     Scanner userInput;
     String inputLine = null;
@@ -15,13 +17,13 @@ public class Sender extends Thread {
 
     @Override
     public void run() {
-
-        
         System.out.println("Please JOIN the chat before trying any other command");
-        System.out.println("The command to JOIN the chat is JOIN IP PORT")
+        System.out.println("The command to JOIN the chat is JOIN IP PORT");
+
         while (true)
         {
             command = userInput.nextLine();
+            Message message;
             
             // check if user is not joined
             if(!hasJoined)
@@ -30,10 +32,9 @@ public class Sender extends Thread {
                 command = parts[0];
                 ip = parts[1];
                 port = parts[2];
-                Message message;
 
                 // if command != JOIN
-                if(command != "JOIN")
+                if(!command.equals("JOIN"))
                 {
                     System.out.println("Please JOIN the chat before trying any other command");
                     hasJoined = true;
@@ -42,52 +43,46 @@ public class Sender extends Thread {
                 {
                     // send a JOIN to the node specified with ip and port
                     // create a node for recipient
-                    message = new Message(JOIN,myNodeInfo);
+                    message = new Message(JOIN, ChatClient.myNodeInfo);
                     NodeInfo recpient = new NodeInfo(ip,Integer.parseInt(port),"");
-                    sendMessage(recpient, message);
+                    ChatClient.sendMessage(recpient, message);
                 }
                     
             }
+            // LEAVE
+            else if (command.equals("LEAVE"))
+            {
+                // send all node with LEAVE message
+                message = new Message(LEAVE, ChatClient.myNodeInfo);
+                ChatClient.sendToAll(message);
+                // make joined flag false 
+                hasJoined = false;
+            }
+            // SHUTDOWN
+            else if (command.equals("SHUTDOWN"))
+            {
+                // send all node with SHUTDOWN message
+                message = new Message(SHUTDOWN, ChatClient.myNodeInfo);
+                ChatClient.sendToAll(message);
+                // shutdown client
+            }
+            // SHUTDOWN_ALL
+            else if (command.equals("SHUTDOWN ALL"))
+            {
+                // send all node with SHUTDOWN_ALL message
+                message = new Message(SHUTDOWN_ALL, ChatClient.myNodeInfo);
+                ChatClient.sendToAll(message);
+                // shutdown client
+            }
+            // Default
             else
             {
-                // do a switch statment depending on input 
-                switch (command)
-                {   
-                    // LEAVE
-                    case LEAVE:
-                        // send all node with LEAVE message
-                        message = new Message(LEAVE,myNodeInfo);
-                        sendToAll(message);
-                        // make joined flag false 
-                        hasJoined = false;
-                        break;
-
-                    // SHUTDOWN
-                    case SHUTDOWN:
-                        // send all node with SHUTDOWN message
-                        message = new Message(SHUTDOWN,myNodeInfo);
-                        sendToAll(message);
-                        // shutdown client
-                        break;
-
-                    // SHUTDOWN_ALL
-                    case SHUTDOWN_ALL:
-                        // send all node with SHUTDOWN_ALL message
-                        message = new Message(SHUTDOWN_ALL,myNodeInfo);
-                        sendToAll(message);
-                        // shutdown client
-                        break;
-
-                    // Default 
-                    default:
-                        // NOTE 
-                        // send all node with NOTE message 
-                        message = new Message(NOTE,myNodeInfo.name + command);
-                        sendToALl(message);
-                        break;
-                }
+                // NOTE 
+                // send all node with NOTE message 
+                message = new Message(NOTE, ChatClient.myNodeInfo.getName() + command);
+                ChatClient.sendToAll(message);
+                break;
             }
-            
         }
     }
 }
