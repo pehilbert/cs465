@@ -51,6 +51,10 @@ public class Sender extends Thread implements MessageTypes {
                 // send all node with LEAVE message
                 message = new Message(LEAVE, ChatClient.myNodeInfo);
                 ChatClient.sendToAll(message);
+
+                // clear participants list
+                ChatClient.participants.clear();
+
                 // make joined flag false 
                 hasJoined = false;
             }
@@ -60,7 +64,9 @@ public class Sender extends Thread implements MessageTypes {
                 // send all node with SHUTDOWN message
                 message = new Message(SHUTDOWN, ChatClient.myNodeInfo);
                 ChatClient.sendToAll(message);
+
                 // shutdown client
+                System.exit(0);
             }
             // SHUTDOWN_ALL
             else if (command.equals("SHUTDOWN ALL"))
@@ -68,7 +74,9 @@ public class Sender extends Thread implements MessageTypes {
                 // send all node with SHUTDOWN_ALL message
                 message = new Message(SHUTDOWN_ALL, ChatClient.myNodeInfo);
                 ChatClient.sendToAll(message);
+
                 // shutdown client
+                System.exit(0);
             }
             // Default
             else
@@ -77,7 +85,6 @@ public class Sender extends Thread implements MessageTypes {
                 // send all node with NOTE message 
                 message = new Message(NOTE, ChatClient.myNodeInfo.getName() + command);
                 ChatClient.sendToAll(message);
-                break;
             }
         }
     }
