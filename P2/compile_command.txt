@@ -1,0 +1,5 @@
+To compile (in P2 directory):
+javac -d bin src/chat/*.java src/utils/*.java src/chat/message/*.java
+
+To run (in bin directory):
+java chat.ChatClient ../config/your_properties.properties

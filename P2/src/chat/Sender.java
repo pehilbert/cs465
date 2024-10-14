@@ -29,7 +29,8 @@ public class Sender extends Thread implements MessageTypes {
             
             // check if user is not joined
             if (command.startsWith("JOIN")) {
-                if (hasJoined) {
+                if (hasJoined) 
+                {
                     System.out.println("You have already joined!");
                     continue;
                 }
@@ -55,7 +56,8 @@ public class Sender extends Thread implements MessageTypes {
             // LEAVE
             else if (command.equals("LEAVE"))
             {
-                if (!hasJoined) {
+                if (!hasJoined) 
+                {
                     System.out.println("You have to JOIN before you can LEAVE");
                     continue;
                 }
@@ -73,14 +75,13 @@ public class Sender extends Thread implements MessageTypes {
             // SHUTDOWN
             else if (command.equals("SHUTDOWN"))
             {
-                if (!hasJoined) {
-                    System.out.println("You have to JOIN before you can SHUTDOWN");
-                    continue;
+                // if the user is currently in the chat, let everyone else know
+                // they are shutting down
+                if (hasJoined) 
+                {
+                    message = new Message(SHUTDOWN, ChatClient.myNodeInfo);
+                    ChatClient.sendToAll(message);
                 }
-
-                // send all node with SHUTDOWN message
-                message = new Message(SHUTDOWN, ChatClient.myNodeInfo);
-                ChatClient.sendToAll(message);
 
                 // shutdown client
                 System.exit(0);
@@ -88,7 +89,8 @@ public class Sender extends Thread implements MessageTypes {
             // SHUTDOWN_ALL
             else if (command.equals("SHUTDOWN ALL"))
             {
-                if (!hasJoined) {
+                if (!hasJoined) 
+                {
                     System.out.println("You have to JOIN before you can SHUTDOWN ALL");
                     continue;
                 }
@@ -103,7 +105,8 @@ public class Sender extends Thread implements MessageTypes {
             // Default
             else
             {
-                if (!hasJoined) {
+                if (!hasJoined) 
+                {
                     System.out.println("You have to JOIN before you can send a NOTE");
                     continue;
                 }
