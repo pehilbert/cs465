@@ -9,7 +9,6 @@ import chat.message.MessageTypes;
 public class Sender extends Thread implements MessageTypes {
     boolean hasJoined  = false;
     Scanner userInput;
-    String inputLine = null;
     String command = null;
     String ip = null;
     String port = null;
@@ -20,6 +19,8 @@ public class Sender extends Thread implements MessageTypes {
         System.out.println("Please JOIN the chat before trying any other command");
         System.out.println("The command to JOIN the chat is JOIN IP PORT, or if you are the first person, just type JOIN");
 
+        userInput = new Scanner(System.in);
+
         while (true)
         {
             command = userInput.nextLine();
@@ -27,7 +28,7 @@ public class Sender extends Thread implements MessageTypes {
             
             // check if user is not joined
             if (command.startsWith("JOIN")) {
-                String parts[] = inputLine.split(" ",3);
+                String parts[] = command.split(" ",3);
                 
                 // if they provide an IP and port, actually send a JOIN message
                 // otherwise, don't do anything except set hasJoined (for the first person)
