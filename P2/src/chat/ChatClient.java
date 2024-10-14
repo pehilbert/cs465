@@ -59,7 +59,7 @@ public class ChatClient implements Runnable {
 
     public static void sendMessage(NodeInfo recipient, Message msg) {
         try {
-            System.out.println("Trying to send a message of type " + Integer.toString(msg.getType()) + " to " + nodeToString(recipient));
+            System.out.println("[DEBUG] Trying to send a message of type " + Integer.toString(msg.getType()) + " to " + nodeToString(recipient));
 
             Socket sendSocket = new Socket(recipient.getAddress(), recipient.getPort());
 
@@ -70,14 +70,14 @@ public class ChatClient implements Runnable {
 
             sendSocket.close();
 
-            System.out.println("Message sent to " + nodeToString(recipient));
+            System.out.println("[DEBUG] Message sent to " + nodeToString(recipient));
         } catch (IOException e) {
-            System.out.println("Error sending message to " + nodeToString(recipient));
+            System.out.println("[DEBUG] Error sending message to " + nodeToString(recipient));
         }
     }
 
     public static void sendToAll(Message msg) {
-        System.out.println("Sending message of type " + Integer.toString(msg.getType()) + " to all participants");
+        System.out.println("[DEBUG] Sending message of type " + Integer.toString(msg.getType()) + " to all participants");
 
         Iterator<NodeInfo> iter = participants.iterator();
 
@@ -86,7 +86,7 @@ public class ChatClient implements Runnable {
             sendMessage(participant, msg);
         }
 
-        System.out.println("Finished sending message of type " + Integer.toString(msg.getType()) + " to all participants");
+        System.out.println("[DEBUG] Finished sending message of type " + Integer.toString(msg.getType()) + " to all participants");
     }
 
     @Override
