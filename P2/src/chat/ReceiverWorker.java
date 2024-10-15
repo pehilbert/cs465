@@ -53,8 +53,11 @@ public class ReceiverWorker extends Thread implements MessageTypes
                 NodeInfo joinerNodeInfo = (NodeInfo)message.getContent();
                 System.out.println("Received JOIN from " + joinerNodeInfo.getName());
 
-                // Send INITIALIZE message back to sender
-                ChatClient.sendMessage(joinerNodeInfo, new Message(INITIALIZE, (Object)ChatClient.participants));
+                // Send INITIALIZE message back to sender with myself included in the list
+                ArrayList<NodeInfo> listToSend = new ArrayList<NodeInfo>(ChatClient.participants);
+                listToSend.add(ChatClient.myNodeInfo);
+
+                ChatClient.sendMessage(joinerNodeInfo, new Message(INITIALIZE, (Object)listToSend));
 
                 // Forward JOINED message to other participants
                 ChatClient.sendToAll(new Message(JOINED, (Object)joinerNodeInfo));
