@@ -115,7 +115,7 @@ public class Sender extends Thread implements MessageTypes
 
                 // NOTE 
                 // send all node with NOTE message 
-                message = new Message(NOTE, (Object)(ChatClient.myNodeInfo.getName() + command));
+                message = new Message(NOTE, (Object)(ChatClient.myNodeInfo.getName() + ": " + command));
                 ChatClient.sendToAll(message);
             }
         }
