@@ -134,5 +134,14 @@ public class ReceiverWorker extends Thread implements MessageTypes
                 System.out.println("ERROR: Somehow got to the default case.");
                 break;
         }
+        
+        try
+        {
+            participantConnection.close();
+        }
+        catch (IOException e)
+        {
+            System.out.println("Error closing participant connection!");
+        }
     }
 }
