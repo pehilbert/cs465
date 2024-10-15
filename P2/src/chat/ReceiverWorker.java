@@ -7,6 +7,7 @@ import java.net.Socket;
 import chat.message.Message;
 import chat.message.MessageTypes;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class ReceiverWorker extends Thread implements MessageTypes 
 {
@@ -107,9 +108,20 @@ public class ReceiverWorker extends Thread implements MessageTypes
 
                 // debug message
                 System.out.println("Received INITIALIZE, setting participants list.");
+                System.out.print("Received list: ");
+                ArrayList<NodeInfo> receivedList = (ArrayList<NodeInfo>)message.getContent();
+                Iterator<NodeInfo> iter = receivedList.iterator();
+
+                while (iter.hasNext()) 
+                {
+                    NodeInfo participant = iter.next();
+                    System.out.print(participant.getName() + " | ");
+                }
+
+                System.out.println();
 
                 // set participants list
-                ChatClient.participants = (ArrayList<NodeInfo>)message.getContent();
+                ChatClient.participants = receivedList;
 
                 break;
 
