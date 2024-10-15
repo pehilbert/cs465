@@ -51,6 +51,7 @@ public class ChatClient implements Runnable {
         }
 
         myNodeInfo = new NodeInfo(NetworkUtilities.getMyIP(), myPort, myName);
+        System.out.println("[DEBUG] My node info: " + nodeToString(myNodeInfo));
     }
 
     private static String nodeToString(NodeInfo node) 
@@ -66,8 +67,8 @@ public class ChatClient implements Runnable {
 
             Socket sendSocket = new Socket(recipient.getAddress(), recipient.getPort());
 
+            ObjectOutputStream writeToNet = new ObjectOutputStream(sendSocket.getOutputStream());
             sendSocket.getInputStream();
-            ObjectOutputStream writeToNet = (ObjectOutputStream)sendSocket.getOutputStream();
 
             writeToNet.writeObject(msg);
 

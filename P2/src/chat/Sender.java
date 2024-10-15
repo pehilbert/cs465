@@ -48,7 +48,7 @@ public class Sender extends Thread implements MessageTypes
                     ip = parts[1];
                     port = parts[2];
 
-                    message = new Message(JOIN, ChatClient.myNodeInfo);
+                    message = new Message(JOIN, (Object)ChatClient.myNodeInfo);
                     NodeInfo recpient = new NodeInfo(ip,Integer.parseInt(port),"");
                     ChatClient.sendMessage(recpient, message);
                 }
@@ -65,7 +65,7 @@ public class Sender extends Thread implements MessageTypes
                 }
 
                 // send all node with LEAVE message
-                message = new Message(LEAVE, ChatClient.myNodeInfo);
+                message = new Message(LEAVE, (Object)ChatClient.myNodeInfo);
                 ChatClient.sendToAll(message);
 
                 // clear participants list
@@ -81,7 +81,7 @@ public class Sender extends Thread implements MessageTypes
                 // they are shutting down
                 if (hasJoined) 
                 {
-                    message = new Message(SHUTDOWN, ChatClient.myNodeInfo);
+                    message = new Message(SHUTDOWN, (Object)ChatClient.myNodeInfo);
                     ChatClient.sendToAll(message);
                 }
 
@@ -98,7 +98,7 @@ public class Sender extends Thread implements MessageTypes
                 }
 
                 // send all node with SHUTDOWN_ALL message
-                message = new Message(SHUTDOWN_ALL, ChatClient.myNodeInfo);
+                message = new Message(SHUTDOWN_ALL, (Object)ChatClient.myNodeInfo);
                 ChatClient.sendToAll(message);
 
                 // shutdown client
@@ -115,7 +115,7 @@ public class Sender extends Thread implements MessageTypes
 
                 // NOTE 
                 // send all node with NOTE message 
-                message = new Message(NOTE, ChatClient.myNodeInfo.getName() + command);
+                message = new Message(NOTE, (Object)(ChatClient.myNodeInfo.getName() + command));
                 ChatClient.sendToAll(message);
             }
         }
