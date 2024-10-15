@@ -63,7 +63,7 @@ public class ChatClient implements Runnable {
     {
         try 
         {
-            System.out.println("[DEBUG] Trying to send a message of type " + Integer.toString(msg.getType()) + " to " + nodeToString(recipient));
+            System.out.println("\n[DEBUG] Trying to send a message of type " + Integer.toString(msg.getType()) + " to " + nodeToString(recipient));
 
             Socket sendSocket = new Socket(recipient.getAddress(), recipient.getPort());
 
@@ -84,7 +84,7 @@ public class ChatClient implements Runnable {
 
     public static void sendToAll(Message msg) 
     {
-        System.out.println("[DEBUG] Sending message of type " + Integer.toString(msg.getType()) + " to all participants");
+        System.out.println("\n[DEBUG] Sending message of type " + Integer.toString(msg.getType()) + " to all participants");
 
         Iterator<NodeInfo> iter = participants.iterator();
 
@@ -94,7 +94,7 @@ public class ChatClient implements Runnable {
             sendMessage(participant, msg);
         }
 
-        System.out.println("[DEBUG] Finished sending message of type " + Integer.toString(msg.getType()) + " to all participants");
+        System.out.println("\n[DEBUG] Finished sending message of type " + Integer.toString(msg.getType()) + " to all participants");
     }
 
     @Override

@@ -23,7 +23,6 @@ public class ReceiverWorker extends Thread implements MessageTypes
         try
         {
             readFromNet = new ObjectInputStream(participantConnection.getInputStream());
-            writeToNet = new ObjectOutputStream(participantConnection.getOutputStream());
         }
         catch(IOException ex)
         {
@@ -37,11 +36,15 @@ public class ReceiverWorker extends Thread implements MessageTypes
     {
         try
         {
+            System.out.println("\n[DEBUG] New message received: reading message object");
             message = (Message)readFromNet.readObject();
+            System.out.println("[DEBUG] Message object read");
+
+            closeConnection();
         }
         catch (IOException | ClassNotFoundException ex)
         {
-            System.out.println(ex.toString());
+            System.out.println("[DEBUG] Error reading object: " + ex.toString());
             System.exit(1);
         }
         
@@ -51,7 +54,7 @@ public class ReceiverWorker extends Thread implements MessageTypes
 
                 // grab the sender's NodeInfo
                 NodeInfo joinerNodeInfo = (NodeInfo)message.getContent();
-                System.out.println("Received JOIN from " + joinerNodeInfo.getName());
+                System.out.println("[DEBUG] Received JOIN from " + joinerNodeInfo.getName());
 
                 // Send INITIALIZE message back to sender with myself included in the list
                 ArrayList<NodeInfo> listToSend = new ArrayList<NodeInfo>(ChatClient.participants);
@@ -63,7 +66,7 @@ public class ReceiverWorker extends Thread implements MessageTypes
                 ChatClient.sendToAll(new Message(JOINED, (Object)joinerNodeInfo));
 
                 // Add new person to our own list
-                System.out.println("Adding " + joinerNodeInfo.getName() + " to list");
+                System.out.println("\n[DEBUG] Adding " + joinerNodeInfo.getName() + " to list");
                 ChatClient.participants.add(joinerNodeInfo);
 
                 break;
@@ -79,18 +82,20 @@ public class ReceiverWorker extends Thread implements MessageTypes
             case LEAVE:
             case SHUTDOWN:
 
+                NodeInfo leaver = (NodeInfo)message.getContent();
+
                 // debug message
-                System.out.println("Received LEAVE/SHUTDOWN, removing participant.");
+                System.out.println("[DEBUG] Received LEAVE/SHUTDOWN from " + leaver.getName() + ", removing participant.");
 
                 // remove person from the list
-                ChatClient.participants.remove( ( NodeInfo )message.getContent() );
+                ChatClient.participants.remove(leaver);
     
                 break;
 
             case SHUTDOWN_ALL:
 
                 // debug message 
-                System.out.println("Received SHUTDOWN ALL, terminating program.");
+                System.out.println("[DEBUG] Received SHUTDOWN ALL, terminating program.");
 
                 // Terminate processes
                 System.exit(0);
@@ -99,19 +104,20 @@ public class ReceiverWorker extends Thread implements MessageTypes
 
             case JOINED:
 
+                NodeInfo personJoined = ( NodeInfo )message.getContent();
                 // debug message
-                System.out.println("Received JOINED, adding participant.");
+                System.out.println("[DEBUG] Received JOINED, adding participant: " + personJoined.getName());
 
                 // add person
-                ChatClient.participants.add( ( NodeInfo )message.getContent() );
+                ChatClient.participants.add(personJoined);
 
                 break;
 
             case INITIALIZE:
 
                 // debug message
-                System.out.println("Received INITIALIZE, setting participants list.");
-                System.out.print("Received list: ");
+                System.out.println("[DEBUG] Received INITIALIZE, setting participants list.");
+                System.out.print("[DEBUG] Received list: ");
                 ArrayList<NodeInfo> receivedList = (ArrayList<NodeInfo>)message.getContent();
                 Iterator<NodeInfo> iter = receivedList.iterator();
 
@@ -131,17 +137,28 @@ public class ReceiverWorker extends Thread implements MessageTypes
             default:
 
                 // shouldn't be possible but whatever
-                System.out.println("ERROR: Somehow got to the default case.");
+                System.out.println("[DEBUG] Somehow got to the default case.");
+                closeConnection();
                 break;
         }
-        
+    }
+
+    private void closeConnection()
+    {
         try
         {
-            participantConnection.close();
+            if (!participantConnection.isClosed())
+            {
+                System.out.println("[DEBUG] Closing participant connection...");
+
+                participantConnection.close();
+
+                System.out.println("[DEBUG] Participant connection closed");
+            }
         }
         catch (IOException e)
         {
-            System.out.println("Error closing participant connection!");
+            System.out.println("[DEBUG] Error closing participant connection!");
         }
     }
 }
