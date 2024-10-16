@@ -17,7 +17,7 @@ public class Receiver extends Thread
         try 
         {
             receiverSocket = new ServerSocket(ChatClient.myNodeInfo.getPort());
-            System.out.println("[Receiver.Receiver] receiver socket created, listening on <IMPLEMENT PORT!>");
+            System.out.println("[Receiver.Receiver] receiver socket created, listening on " + Integer.toString(ChatClient.myNodeInfo.getPort()));
         }
 
         catch( IOException ex ) // change to print
@@ -25,7 +25,7 @@ public class Receiver extends Thread
             Logger.getLogger(Receiver.class.getName()).log(Level.SEVERE, "ERROR CREATING RECEIVER");
         }
     
-        System.out.println(ChatClient.myNodeInfo.getName() + " listening on <IMPLEMENT PORT!>" );
+        System.out.println(ChatClient.myNodeInfo.getName() + " listening on " + Integer.toString(ChatClient.myNodeInfo.getPort()) );
 
     }
 
