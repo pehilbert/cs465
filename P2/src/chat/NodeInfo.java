@@ -37,7 +37,8 @@ public class NodeInfo implements Serializable {
     }
 
     @Override
-    public boolean equals(Object other) {
+    public boolean equals(Object other) 
+    {
         String otherIP = ((NodeInfo) other).getAddress();
         int otherPort = ((NodeInfo) other).getPort();
         

@@ -7,8 +7,10 @@ import java.net.Socket;
 import chat.message.Message;
 import chat.message.MessageTypes;
 import java.util.ArrayList;
+import java.util.Iterator;
 
-public class ReceiverWorker extends Thread implements MessageTypes {
+public class ReceiverWorker extends Thread implements MessageTypes 
+{
     Socket participantConnection;
     ObjectInputStream readFromNet = null;
     ObjectOutputStream writeToNet = null;
@@ -21,7 +23,6 @@ public class ReceiverWorker extends Thread implements MessageTypes {
         try
         {
             readFromNet = new ObjectInputStream(participantConnection.getInputStream());
-            writeToNet = new ObjectOutputStream(participantConnection.getOutputStream());
         }
         catch(IOException ex)
         {
@@ -35,81 +36,129 @@ public class ReceiverWorker extends Thread implements MessageTypes {
     {
         try
         {
+            System.out.println("\n[DEBUG] New message received: reading message object");
             message = (Message)readFromNet.readObject();
+            System.out.println("[DEBUG] Message object read");
+
+            closeConnection();
         }
         catch (IOException | ClassNotFoundException ex)
         {
-            System.out.println(ex.toString());
+            System.out.println("[DEBUG] Error reading object: " + ex.toString());
             System.exit(1);
         }
         
-        // TODO: big ass switch statement
-        // Note: You can probably pull a lot from the old server and old client receiver worker
         switch (message.getType()) 
         {
             case JOIN:
-                NodeInfo joinerNodeInfo = (NodeInfo)message.getContent();
-                System.out.println("Received JOIN from " + joinerNodeInfo.getName());
 
-                ChatClient.sendMessage(joinerNodeInfo, new Message(INITIALIZE, (Object)ChatClient.participants));
+                // grab the sender's NodeInfo
+                NodeInfo joinerNodeInfo = (NodeInfo)message.getContent();
+                System.out.println("[DEBUG] Received JOIN from " + joinerNodeInfo.getName());
+
+                // Send INITIALIZE message back to sender with myself included in the list
+                ArrayList<NodeInfo> listToSend = new ArrayList<NodeInfo>(ChatClient.participants);
+                listToSend.add(ChatClient.myNodeInfo);
+
+                ChatClient.sendMessage(joinerNodeInfo, new Message(INITIALIZE, (Object)listToSend));
+
+                // Forward JOINED message to other participants
                 ChatClient.sendToAll(new Message(JOINED, (Object)joinerNodeInfo));
 
-                System.out.println("Adding " + joinerNodeInfo.getName() + " to list");
+                // Add new person to our own list
+                System.out.println("\n[DEBUG] Adding " + joinerNodeInfo.getName() + " to list");
                 ChatClient.participants.add(joinerNodeInfo);
 
-            break;
+                break;
 
 
             case NOTE:
 
+                // Just print the note
                 System.out.println(message.getContent());
-
-            break;
+                break;
 
 
             case LEAVE:
             case SHUTDOWN:
 
-                // debug message
-                System.out.println("Received LEAVE/SHUTDOWN, removing participant.");
+                NodeInfo leaver = (NodeInfo)message.getContent();
 
-                // remove person from the node
-                ChatClient.participants.remove( ( NodeInfo )message.getContent() );
+                // debug message
+                System.out.println("[DEBUG] Received LEAVE/SHUTDOWN from " + leaver.getName() + ", removing participant.");
+
+                // remove person from the list
+                ChatClient.participants.remove(leaver);
     
                 break;
 
             case SHUTDOWN_ALL:
 
                 // debug message 
-                System.out.println("Received SHUTDOWN ALL, terminating program.");
+                System.out.println("[DEBUG] Received SHUTDOWN ALL, terminating program.");
 
                 // Terminate processes
                 System.exit(0);
-            break;
+
+                break;
 
             case JOINED:
 
+                NodeInfo personJoined = ( NodeInfo )message.getContent();
                 // debug message
-                System.out.println("Received JOINED, adding participant.");
+                System.out.println("[DEBUG] Received JOINED, adding participant: " + personJoined.getName());
 
                 // add person
-                ChatClient.participants.add( ( NodeInfo )message.getContent() );
+                ChatClient.participants.add(personJoined);
 
-            break;
+                break;
 
             case INITIALIZE:
+
                 // debug message
-                System.out.println("Received INITIALIZE, setting participants list.");
+                System.out.println("[DEBUG] Received INITIALIZE, setting participants list.");
+                System.out.print("[DEBUG] Received list: ");
+                ArrayList<NodeInfo> receivedList = (ArrayList<NodeInfo>)message.getContent();
+                Iterator<NodeInfo> iter = receivedList.iterator();
 
-                // add person
-                ChatClient.participants = (ArrayList<NodeInfo>)message.getContent();
+                while (iter.hasNext()) 
+                {
+                    NodeInfo participant = iter.next();
+                    System.out.print(participant.getName() + " | ");
+                }
 
-            break;
+                System.out.println();
+
+                // set participants list
+                ChatClient.participants = receivedList;
+
+                break;
 
             default:
-            // shouldn't be possible but whatever
-            System.out.println("ERROR: You somehow got to the default case?? You fucked up");
-            break;
+
+                // shouldn't be possible but whatever
+                System.out.println("[DEBUG] Somehow got to the default case.");
+                closeConnection();
+                break;
+        }
+    }
+
+    private void closeConnection()
+    {
+        try
+        {
+            if (!participantConnection.isClosed())
+            {
+                System.out.println("[DEBUG] Closing participant connection...");
+
+                participantConnection.close();
+
+                System.out.println("[DEBUG] Participant connection closed");
+            }
+        }
+        catch (IOException e)
+        {
+            System.out.println("[DEBUG] Error closing participant connection!");
         }
     }
 }
