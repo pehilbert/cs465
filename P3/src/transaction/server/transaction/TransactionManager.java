@@ -7,7 +7,6 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 import transaction.comm.Message;
 import transaction.comm.MessageTypes;
 import transaction.server.TransactionServer;
@@ -85,21 +84,34 @@ public class TransactionManager implements MessageTypes
             Integer checkedAccount;
             
             // assign a transaction number to this transaction
-            // ...            
+            transaction.setTransactionNumber(++transactionNumberCounter);
+
+            transactionNumber = transaction.getTransactionNumber();
+            lastCommittedTransactionNumber = transaction.getLastAssignedTransactionNumber();
 
             // run through all overlapping transactions
             // use transactionNumberIndex as the transaction number of overlapping transaction currently looked at
-            for (/* ... */)
+            for (transactionNumberIndex = lastCommittedTransactionNumber; transactionNumberIndex < transactionNumber; transactionNumberIndex++)
             {
                 // get transaction with transaction number transactionNumberIndex
                 // from committedTransactions -> checkedTransaction
-                // ...
+                checkedTransaction = committedTransactions.get(transactionNumberIndex);
                 
                 // make sure transaction with transactionNumberIndex was not aborted before
                 if(checkedTransaction != null)
                 {
                     // check our own read set against the write set of the checkedTransaction
-                    // ...
+                    readSetIterator = readSet.iterator();
+                    checkedTransactionWriteSet = checkedTransaction.getWriteSet();
+                    
+                    // If there is an entry in the write set for an account in the read set, return false
+                    while (readSetIterator.hasNext()) {
+                        checkedAccount = readSetIterator.next();
+                        
+                        if (checkedTransactionWriteSet.containsKey(checkedAccount)) {
+                            return false;
+                        }
+                    }
                 }
             }
                         
@@ -118,10 +130,14 @@ public class TransactionManager implements MessageTypes
         HashMap<Integer, Integer> transactionWriteSet = transaction.getWriteSet();
         int account;
         int balance;
-         
+        
+        Iterator<Integer> writeSetIterator = transactionWriteSet.keySet().iterator();
+
         // get all the entries of this write set
-        for (/* all entries in write set */) {
-            // ....
+        while (writeSetIterator.hasNext()) {
+            account = writeSetIterator.next();
+            balance = transactionWriteSet.get(account);
+            TransactionServer.accountManager.write(account, balance);
                             
             transaction.log("[TransactionManager.writeTransaction] Transaction #" + transaction.getTransactionID() + " written");                    
         }        
@@ -192,19 +208,29 @@ public class TransactionManager implements MessageTypes
                     case OPEN_TRANSACTION:
                     // -------------------------------------------------------------------------------------------
 
+                        int transactionID;
+
                         // synchronize on the runningTransactions
                         synchronized (runningTransactions) 
                         {
                             // create new transaction and assign a new transaction ID
                             // most importantly, pass in the last assigned transaction number
-                            // ...
+                            transactionID = ++transactionIdCounter;
+                            transaction = new Transaction(transactionID, transactionNumberCounter);
                             
                             // add the new transaction to ArrayList runningTransactions
-                            // ...
+                            runningTransactions.add(transaction);
                         }
 
                         // write back transactionID to client
-                        // ...
+                        try
+                        {
+                            writeToNet.writeInt(transactionID);
+                        }
+                        catch (IOException e)
+                        {
+                            System.out.println("Error writing back transaction number");
+                        }
 
                         // add log
                         transaction.log("[TransactionManagerWorker.run] " + OPEN_COLOR + "OPEN_TRANSACTION" + RESET_COLOR + " #" + transaction.getTransactionID());
@@ -219,20 +245,27 @@ public class TransactionManager implements MessageTypes
                         synchronized (runningTransactions)
                         {
                             // remove transaction from ArrayList runningTransactions
-                            // ...
+                            runningTransactions.remove(transaction);
 
                             // the BIG thing, we enter validation phase and, if successful, the update phase
                             if (validateTransaction(transaction))
                             {
                                 // add this transaction to committedTransactions
                                 // important step! information used in other transactions' validations, if they overlap with this one
-                                // ...
+                                committedTransactions.put(transaction.getTransactionNumber(), transaction);
                                 
                                 // this is the update phase ... write data to operational data in one go
-                                // ...
+                                writeTransaction(transaction);
                                 
                                 // tell client that transaction committed
-                                // ...      
+                                try
+                                {
+                                    writeToNet.writeInt(TRANSACTION_COMMITTED);
+                                }
+                                catch (IOException e)
+                                {
+                                    System.out.println("Error writing back transaction committed status");
+                                }
 
                                 // add log committed
                                 transaction.log("[TransactionManagerWorker.run] " + COMMIT_COLOR + "CLOSE_TRANSACTION"+ RESET_COLOR + " #" + transaction.getTransactionID() + " - COMMITTED");
@@ -244,7 +277,14 @@ public class TransactionManager implements MessageTypes
                                 abortedTransactions.add(transaction);
 
                                 // tell client that transaction was aborted
-                                // ...
+                                try
+                                {
+                                    writeToNet.writeInt(TRANSACTION_ABORTED);
+                                }
+                                catch (IOException e)
+                                {
+                                    System.out.println("Error writing back transaction aborted status");
+                                }
 
                                 // add log aborted
                                 transaction.log("[TransactionManagerWorker.run] " + ABORT_COLOR + "CLOSE_TRANSACTION"+ RESET_COLOR + " #" + transaction.getTransactionID() + " - ABORTED");
@@ -252,7 +292,14 @@ public class TransactionManager implements MessageTypes
                         }
 
                         // regardless whether the transaction committed or aborted, shut down network connections
-                        // ...
+                        try
+                        {
+                            client.close();
+                        }
+                        catch (IOException e)
+                        {
+                            System.out.println("Error closing client socket");
+                        }
 
                         // finally print out the transaction's log
                         if (TransactionServer.transactionView) 
@@ -268,7 +315,7 @@ public class TransactionManager implements MessageTypes
                     // -------------------------------------------------------------------------------------------
  
                         // get account number
-                        // ...
+                        accountNumber = (int)message.getContent();
                         
                         // add log pre read
                         transaction.log("[TransactionManagerWorker.run] "+ READ_COLOR + "READ_REQUEST" + RESET_COLOR + " >>>>>>>>>>>>>>>>>>>> account #" + accountNumber);
@@ -279,7 +326,14 @@ public class TransactionManager implements MessageTypes
                         // <======
 
                         // confirm read to client
-                        // ...
+                        try
+                        {
+                            writeToNet.writeInt(balance);
+                        }
+                        catch (IOException e)
+                        {
+                            System.out.println("Error writing back read balance");
+                        }
 
                         // add log post read
                         transaction.log("[TransactionManagerWorker.run] "+ READ_COLOR + "READ_REQUEST" + RESET_COLOR + " <<<<<<<<<<<<<<<<<<<< account #" + accountNumber + ", balance $" + balance);
@@ -292,7 +346,9 @@ public class TransactionManager implements MessageTypes
                     // -------------------------------------------------------------------------------------------
 
                         // get the message content: account number and balance to write
-                        // ....
+                        accountNumber = (int)((Object[])message.getContent())[0];
+                        balance = (int)((Object[])message.getContent())[1];
+                        int oldBalance = transaction.read(accountNumber);
                         
                         // add log pre write
                         transaction.log("[TransactionManagerWorker.run] " + WRITE_COLOR + "WRITE_REQUEST" + RESET_COLOR + " >>>>>>>>>>>>>>>>>>> account #" + accountNumber + ", balance to write $" + balance);
@@ -303,7 +359,14 @@ public class TransactionManager implements MessageTypes
                         // <======
 
                         // write back old balance to client
-                        // ....
+                        try
+                        {
+                            writeToNet.writeInt(oldBalance);
+                        }
+                        catch (IOException e)
+                        {
+                            System.out.println("Error writing back old balance for write request");
+                        }
 
                         // add log post write
                         transaction.log("[TransactionManagerWorker.run] " + WRITE_COLOR + "WRITE_REQUEST" + RESET_COLOR + " <<<<<<<<<<<<<<<<<<<< account #" + accountNumber + ", wrote $" + balance);
