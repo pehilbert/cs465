@@ -40,14 +40,22 @@ public class Transaction {
             // i.e. is contained in the writeSet of this transaction
             // use get() on the writeSet
             // ...
+            if(writeSet.get(accountNumber) == null)
+            {
+            
 
             // if it is not in the writeSet, read the committed version of it from AccountManager
             // note: null and numerical zero are not the same thing!
             // ...
-
+                return TransactionServer.accountManager.read(accountNumber);
+            }
             // check if this account number is already in the readSet
             // and add it, if not
             // ...
+            if(!readSet.contains(accountNumber))
+            {
+                readSet.add(accountNumber);
+            }
 
             return balance;
 	}
@@ -57,10 +65,12 @@ public class Transaction {
 	{
             // read (and return) old balance
             // ...
+            int oldBalance = TransactionServer.accountManager.read(accountNumber);
 
             // put <accountNumber, newBalance> in writeSet
             // possibly overwriting a prior write
             // ...
+            TransactionServer.accountManager.write(accountNumber,newBalance);
 
             return oldBalance;
 	}
