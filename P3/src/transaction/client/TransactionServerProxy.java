@@ -49,7 +49,8 @@ public class TransactionServerProxy implements MessageTypes{
 
         // throw in a try/except idk what might go wrong
         try 
-        {
+        {   
+            // create new connections
             serverConnection = new Socket(host, port);
             writeToNet = new ObjectOutputStream(serverConnection.getOutputStream());
             readFromNet = new ObjectInputStream(serverConnection.getInputStream());
