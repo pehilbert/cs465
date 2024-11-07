@@ -46,10 +46,30 @@ public class TransactionServerProxy implements MessageTypes{
 
         // open up connection to server
         // ...
+
+        // throw in a try/except idk what might go wrong
+        try 
+        {
+            serverConnection = new Socket(host, port);
+            writeToNet = new ObjectOutputStream(serverConnection.getOutputStream());
+            readFromNet = new ObjectInputStream(serverConnection.getInputStream());
+
+
+            // send OPEN_TRANSACTION message & receive transactionID
+            // leave connection open!
+            // ...
+            Message openMessage = new Message(MessageTypes.OPEN_TRANSACTION);
+            writeToNet.writeObject(openMessage);
+
+            // Receive transactionID from server
+            Message response = (Message) readFromNet.readObject();
+            transactionID = (Integer) response.getContent();
+        } 
         
-        // send OPEN_TRANSACTION message & receive transactionID
-        // leave connection open!
-        // ...
+        catch (IOException | ClassNotFoundException e) 
+        {
+            e.printStackTrace();
+        }
         
         return transactionID;
     }
@@ -66,6 +86,25 @@ public class TransactionServerProxy implements MessageTypes{
         // send CLOSE_TRANSACTION message & receive returnStatus
         // shut down connection
         // ...
+        
+        try 
+        {
+            // Send CLOSE_TRANSACTION message
+            Message closeMessage = new Message(MessageTypes.CLOSE_TRANSACTION, transactionID);
+            writeToNet.writeObject(closeMessage);
+
+            // Receive return status
+            Message response = (Message) readFromNet.readObject();
+            returnStatus = (Integer) response.getContent();
+
+            // Close the connection
+            serverConnection.close();
+        } 
+        
+        catch (IOException | ClassNotFoundException e) 
+        {
+            e.printStackTrace();
+        }
 
         return returnStatus;
     }
@@ -83,6 +122,21 @@ public class TransactionServerProxy implements MessageTypes{
         // write READ_REQUEST and receive balance
         // ...
 
+        try 
+        {
+            // Send READ_REQUEST message with transaction ID and account number
+            Message readMessage = new Message(READ_REQUEST, accountNumber);
+
+            writeToNet.writeObject(readMessage);
+    
+            // Receive the account balance
+            Message response = (Message) readFromNet.readObject();
+            balance = (Integer) response.getContent();
+        } 
+        catch (IOException | ClassNotFoundException e) 
+            {
+            e.printStackTrace();
+        }
         return balance;
     }
 
@@ -99,6 +153,22 @@ public class TransactionServerProxy implements MessageTypes{
         
         // write WRITE_REQUEST and receive prior balance
         // ...
+
+        try 
+        {
+            // Send WRITE_REQUEST message with transaction ID, account number, and amount
+            Message writeMessage = new Message(WRITE_REQUEST, new int[]{accountNumber, amount});
+            writeToNet.writeObject(writeMessage);
+    
+            // Receive the prior account balance
+            Message response = (Message) readFromNet.readObject();
+            balance = (Integer) response.getContent();
+        } 
+        
+        catch (IOException | ClassNotFoundException e) 
+        {
+            e.printStackTrace();
+        }
         
         return balance;
     }
