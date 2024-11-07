@@ -71,53 +71,53 @@ public class TransactionManager implements MessageTypes
      * @return a flag indicating whether validation was successful
      */
     public boolean validateTransaction(Transaction transaction)
+    {
+        int transactionNumber;
+        int lastCommittedTransactionNumber;
+        int transactionNumberIndex;
+        
+        ArrayList<Integer> readSet = transaction.getReadSet();
+        HashMap<Integer, Integer> checkedTransactionWriteSet;
+        Iterator<Integer> readSetIterator;
+        
+        Transaction checkedTransaction;
+        Integer checkedAccount;
+        
+        // assign a transaction number to this transaction
+        transactionNumber = ++transactionNumberCounter;
+        transaction.setTransactionNumber(transactionNumber);
+
+        lastCommittedTransactionNumber = transaction.getLastAssignedTransactionNumber();
+
+        // run through all overlapping transactions
+        // use transactionNumberIndex as the transaction number of overlapping transaction currently looked at
+        for (transactionNumberIndex = lastCommittedTransactionNumber; transactionNumberIndex < transactionNumber; transactionNumberIndex++)
         {
-            int transactionNumber;
-            int lastCommittedTransactionNumber;
-            int transactionNumberIndex;
+            // get transaction with transaction number transactionNumberIndex
+            // from committedTransactions -> checkedTransaction
+            checkedTransaction = committedTransactions.get(transactionNumberIndex);
             
-            ArrayList<Integer> readSet = transaction.getReadSet();
-            HashMap<Integer, Integer> checkedTransactionWriteSet;
-            Iterator<Integer> readSetIterator;
-            
-            Transaction checkedTransaction;
-            Integer checkedAccount;
-            
-            // assign a transaction number to this transaction
-            transaction.setTransactionNumber(++transactionNumberCounter);
-
-            transactionNumber = transaction.getTransactionNumber();
-            lastCommittedTransactionNumber = transaction.getLastAssignedTransactionNumber();
-
-            // run through all overlapping transactions
-            // use transactionNumberIndex as the transaction number of overlapping transaction currently looked at
-            for (transactionNumberIndex = lastCommittedTransactionNumber; transactionNumberIndex < transactionNumber; transactionNumberIndex++)
+            // make sure transaction with transactionNumberIndex was not aborted before
+            if(checkedTransaction != null)
             {
-                // get transaction with transaction number transactionNumberIndex
-                // from committedTransactions -> checkedTransaction
-                checkedTransaction = committedTransactions.get(transactionNumberIndex);
+                // check our own read set against the write set of the checkedTransaction
+                readSetIterator = readSet.iterator();
+                checkedTransactionWriteSet = checkedTransaction.getWriteSet();
                 
-                // make sure transaction with transactionNumberIndex was not aborted before
-                if(checkedTransaction != null)
-                {
-                    // check our own read set against the write set of the checkedTransaction
-                    readSetIterator = readSet.iterator();
-                    checkedTransactionWriteSet = checkedTransaction.getWriteSet();
+                // If there is an entry in the write set for an account in the read set, return false
+                while (readSetIterator.hasNext()) {
+                    checkedAccount = readSetIterator.next();
                     
-                    // If there is an entry in the write set for an account in the read set, return false
-                    while (readSetIterator.hasNext()) {
-                        checkedAccount = readSetIterator.next();
-                        
-                        if (checkedTransactionWriteSet.containsKey(checkedAccount)) {
-                            return false;
-                        }
+                    if (checkedTransactionWriteSet.containsKey(checkedAccount)) {
+                        return false;
                     }
                 }
             }
-                        
-            transaction.log("[TransactionManager.validateTransaction] Transaction #" + transaction.getTransactionID() + " successfully validated");
-            return true;
         }
+                    
+        transaction.log("[TransactionManager.validateTransaction] Transaction #" + transaction.getTransactionID() + " successfully validated");
+        return true;
+    }
      
     
     /**
@@ -134,7 +134,8 @@ public class TransactionManager implements MessageTypes
         Iterator<Integer> writeSetIterator = transactionWriteSet.keySet().iterator();
 
         // get all the entries of this write set
-        while (writeSetIterator.hasNext()) {
+        while (writeSetIterator.hasNext()) 
+        {
             account = writeSetIterator.next();
             balance = transactionWriteSet.get(account);
             TransactionServer.accountManager.write(account, balance);
