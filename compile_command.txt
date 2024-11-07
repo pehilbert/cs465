@@ -1,0 +1,2 @@
+javac -d bin $(find . -name "*.java")
+java -cp bin transaction.server.TransactionServer
