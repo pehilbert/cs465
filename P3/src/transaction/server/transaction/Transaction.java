@@ -24,55 +24,57 @@ public class Transaction {
 
 
 	Transaction(int transactionID, int lastCommittedTransactionNumber)
-        {
-            // save the transactionID and lastAssignedTransactionNumber
-            // the latter is at the very foundation to make the whole OCC work!
-            this.transactionID = transactionID;
-            this.lastAssignedTransactionNumber = lastCommittedTransactionNumber;
+    {
+        // save the transactionID and lastAssignedTransactionNumber
+        // the latter is at the very foundation to make the whole OCC work!
+        this.transactionID = transactionID;
+        this.lastAssignedTransactionNumber = lastCommittedTransactionNumber;
 	}
 
         
 	public int read (int accountNumber)
 	{       
-            Integer balance;
+        Integer balance;
 
-            // check if value to be read was written by this transaction
-            // i.e. is contained in the writeSet of this transaction
-            // use get() on the writeSet
-            // ...
-            if(writeSet.get(accountNumber) == null)
-            {
-            
-
+        // check if value to be read was written by this transaction
+        // i.e. is contained in the writeSet of this transaction
+        // use get() on the writeSet
+        // ...
+        if(writeSet.get(accountNumber) == null)
+        {
             // if it is not in the writeSet, read the committed version of it from AccountManager
             // note: null and numerical zero are not the same thing!
-            // ...
-                return TransactionServer.accountManager.read(accountNumber);
-            }
-            // check if this account number is already in the readSet
-            // and add it, if not
-            // ...
-            if(!readSet.contains(accountNumber))
-            {
-                readSet.add(accountNumber);
-            }
+            balance = TransactionServer.accountManager.read(accountNumber);
+        }
+        else
+        {
+            balance = writeSet.get(accountNumber);
+        }
 
-            return balance;
+        // check if this account number is already in the readSet
+        // and add it, if not
+        // ...
+        if(!readSet.contains(accountNumber))
+        {
+            readSet.add(accountNumber);
+        }
+
+        return balance;
 	}
 
 
 	public int write (int accountNumber, int newBalance) 
 	{
-            // read (and return) old balance
-            // ...
-            int oldBalance = TransactionServer.accountManager.read(accountNumber);
+        // read (and return) old balance
+        // ...
+        int oldBalance = TransactionServer.accountManager.read(accountNumber);
 
-            // put <accountNumber, newBalance> in writeSet
-            // possibly overwriting a prior write
-            // ...
-            TransactionServer.accountManager.write(accountNumber,newBalance);
+        // put <accountNumber, newBalance> in writeSet
+        // possibly overwriting a prior write
+        // ...
+        TransactionServer.accountManager.write(accountNumber,newBalance);
 
-            return oldBalance;
+        return oldBalance;
 	}
 
 
