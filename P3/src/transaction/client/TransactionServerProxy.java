@@ -46,14 +46,23 @@ public class TransactionServerProxy implements MessageTypes{
 
         // open up connection to server
         // ...
+        int transactionID = -1;
+
+        System.out.println("Made it here 1");
+
 
         // throw in a try/except idk what might go wrong
         try 
         {   
             // create new connections
             serverConnection = new Socket(host, port);
+
+            System.out.println("Made it here 1.1");
             writeToNet = new ObjectOutputStream(serverConnection.getOutputStream());
+
+            System.out.println("Made it here 1.2");
             readFromNet = new ObjectInputStream(serverConnection.getInputStream());
+            System.out.println("Made it here 1.3");
 
 
             // send OPEN_TRANSACTION message & receive transactionID
@@ -61,13 +70,16 @@ public class TransactionServerProxy implements MessageTypes{
             // ...
             Message openMessage = new Message(MessageTypes.OPEN_TRANSACTION);
             writeToNet.writeObject(openMessage);
+            //writeToNet.flush();
+            System.out.println("Made it here 1.4");
 
             // Receive transactionID from server
-            Message response = (Message) readFromNet.readObject();
-            transactionID = (Integer) response.getContent();
+            transactionID = readFromNet.readInt();
+            System.out.println("Made it here 1.5");
+            // transactionID = (Integer) response.;
         } 
         
-        catch (IOException | ClassNotFoundException e) 
+        catch (IOException e) 
         {
             e.printStackTrace();
         }
@@ -106,6 +118,7 @@ public class TransactionServerProxy implements MessageTypes{
         {
             e.printStackTrace();
         }
+        System.out.println("Made it here 2");
 
         return returnStatus;
     }
@@ -120,6 +133,7 @@ public class TransactionServerProxy implements MessageTypes{
     public int read(int accountNumber) {
         int balance = 0;
 
+
         // write READ_REQUEST and receive balance
         // ...
 
@@ -129,15 +143,18 @@ public class TransactionServerProxy implements MessageTypes{
             Message readMessage = new Message(READ_REQUEST, accountNumber);
 
             writeToNet.writeObject(readMessage);
+            writeToNet.flush();
     
             // Receive the account balance
-            Message response = (Message) readFromNet.readObject();
-            balance = (Integer) response.getContent();
+            balance =  readFromNet.readInt();
+            //balance = (Integer) response.getContent();
         } 
-        catch (IOException | ClassNotFoundException e) 
+        catch (IOException e) 
             {
             e.printStackTrace();
         }
+
+        System.out.println("Made it here 3");
         return balance;
     }
 
@@ -162,15 +179,15 @@ public class TransactionServerProxy implements MessageTypes{
             writeToNet.writeObject(writeMessage);
     
             // Receive the prior account balance
-            Message response = (Message) readFromNet.readObject();
-            balance = (Integer) response.getContent();
+            balance = readFromNet.readInt();
+            //balance = (Integer) response.getContent();
         } 
         
-        catch (IOException | ClassNotFoundException e) 
+        catch (IOException e) 
         {
             e.printStackTrace();
         }
-        
+        System.out.println("Made it here 4");
         return balance;
     }
 }

@@ -227,6 +227,8 @@ public class TransactionManager implements MessageTypes
                         try
                         {
                             writeToNet.writeInt(transactionID);
+                            writeToNet.flush();
+                            System.out.println(transactionID);
                         }
                         catch (IOException e)
                         {
@@ -262,6 +264,7 @@ public class TransactionManager implements MessageTypes
                                 try
                                 {
                                     writeToNet.writeInt(TRANSACTION_COMMITTED);
+                                    writeToNet.flush();
                                 }
                                 catch (IOException e)
                                 {
@@ -281,6 +284,7 @@ public class TransactionManager implements MessageTypes
                                 try
                                 {
                                     writeToNet.writeInt(TRANSACTION_ABORTED);
+                                    writeToNet.flush();
                                 }
                                 catch (IOException e)
                                 {
@@ -308,6 +312,8 @@ public class TransactionManager implements MessageTypes
                             System.out.println(transaction.getLog());
                         }
 
+                        keepgoing = false;
+
                         break;
 
                         
@@ -330,6 +336,7 @@ public class TransactionManager implements MessageTypes
                         try
                         {
                             writeToNet.writeInt(balance);
+                            writeToNet.flush();
                         }
                         catch (IOException e)
                         {
@@ -347,8 +354,8 @@ public class TransactionManager implements MessageTypes
                     // -------------------------------------------------------------------------------------------
 
                         // get the message content: account number and balance to write
-                        accountNumber = (int)((Object[])message.getContent())[0];
-                        balance = (int)((Object[])message.getContent())[1];
+                        accountNumber = ((int[]) message.getContent())[0];
+                        balance = ((int[]) message.getContent())[1];
                         int oldBalance = transaction.read(accountNumber);
                         
                         // add log pre write
@@ -363,6 +370,7 @@ public class TransactionManager implements MessageTypes
                         try
                         {
                             writeToNet.writeInt(oldBalance);
+                            writeToNet.flush();
                         }
                         catch (IOException e)
                         {
