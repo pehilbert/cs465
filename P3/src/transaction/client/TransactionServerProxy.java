@@ -70,6 +70,7 @@ public class TransactionServerProxy implements MessageTypes{
             // ...
             Message openMessage = new Message(MessageTypes.OPEN_TRANSACTION);
             writeToNet.writeObject(openMessage);
+            writeToNet.flush();
             //writeToNet.flush();
             System.out.println("Made it here 1.4");
 
@@ -105,6 +106,7 @@ public class TransactionServerProxy implements MessageTypes{
             // Send CLOSE_TRANSACTION message
             Message closeMessage = new Message(MessageTypes.CLOSE_TRANSACTION, transactionID);
             writeToNet.writeObject(closeMessage);
+            writeToNet.flush();
 
             // Receive return status
             Message response = (Message) readFromNet.readObject();
@@ -177,6 +179,7 @@ public class TransactionServerProxy implements MessageTypes{
             // Send WRITE_REQUEST message with transaction ID, account number, and amount
             Message writeMessage = new Message(WRITE_REQUEST, new int[]{accountNumber, amount});
             writeToNet.writeObject(writeMessage);
+            writeToNet.flush();
     
             // Receive the prior account balance
             balance = readFromNet.readInt();
