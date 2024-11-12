@@ -1,0 +1,46 @@
+Properties Summary
+        HOST:               127.0.0.1
+        PORT:               8181
+        NUMBER_ACCOUNTS:    10
+        NUMBER_TRANSACTIONS:20
+Transaction #19 started, transfer $6: 9->1
+Transaction #13 started, transfer $1: 6->7
+Transaction #18 started, transfer $10: 2->6
+Transaction #9 started, transfer $2: 9->9
+Transaction #20 started, transfer $4: 2->9
+Transaction #4 started, transfer $4: 8->3
+Transaction #15 started, transfer $4: 0->1
+Transaction #2 started, transfer $7: 7->6
+Transaction #3 started, transfer $6: 7->6
+Transaction #14 started, transfer $5: 0->1
+Transaction #10 started, transfer $10: 3->5
+Transaction #8 started, transfer $1: 5->6
+Transaction #17 started, transfer $9: 0->3
+Transaction #6 started, transfer $3: 5->8
+Transaction #7 started, transfer $2: 1->4
+Transaction #1 started, transfer $6: 3->8
+Transaction #16 started, transfer $3: 4->2
+Transaction #11 started, transfer $6: 6->4
+Transaction #12 started, transfer $9: 4->0
+Transaction #5 started, transfer $6: 1->5
+Transaction #11 COMMITTED
+Transaction #1 COMMITTED
+Transaction #6 COMMITTED
+Transaction #12 COMMITTED
+Transaction #4 COMMITTED
+Transaction #5 COMMITTED
+Transaction #9 COMMITTED
+Transaction #3 COMMITTED
+Transaction #16 COMMITTED
+Transaction #2 COMMITTED
+Transaction #10 COMMITTED
+Transaction #8 COMMITTED
+Transaction #14 COMMITTED
+Transaction #19 COMMITTED
+Transaction #20 COMMITTED
+Transaction #7 COMMITTED
+Transaction #15 COMMITTED
+Transaction #13 COMMITTED
+Transaction #17 COMMITTED
+Transaction #18 COMMITTED
+============================================================= WE ARE DONE, SHUTTING DOWN =============================================================

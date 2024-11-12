@@ -1,2 +1,3 @@
-javac -d bin $(find . -name "*.java")
+javac -d bin src/transaction/client/*.java src/transaction/comm/*.java src/transaction/server/account/*.java src/transaction/server/transaction/*.java src/transaction/server/*.java src/utils/*.java
 java -cp bin transaction.server.TransactionServer
+java -cp bin transaction.client.TransactionClient

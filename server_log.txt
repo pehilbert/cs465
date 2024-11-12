@@ -1,0 +1,249 @@
+[TransactionServer.TransactionServer] TransactionManager created
+[TransactionServer.TransactionServer] AccountManager created
+[TransactionServer.TransactionServer] ServerSocket created
+1
+4
+5
+6
+7
+8
+2
+11
+12
+10
+13
+14
+15
+16
+17
+18
+20
+19
+3
+9
+12 Transaction #19 [TransactionManagerWorker.run] OPEN_TRANSACTION #19
+10 Transaction #15 [TransactionManagerWorker.run] OPEN_TRANSACTION #15
+19 Transaction #16 [TransactionManagerWorker.run] OPEN_TRANSACTION #16
+7 Transaction #11 [TransactionManagerWorker.run] OPEN_TRANSACTION #11
+11 Transaction #20 [TransactionManagerWorker.run] OPEN_TRANSACTION #20
+6 Transaction #10 [TransactionManagerWorker.run] OPEN_TRANSACTION #10
+9 Transaction #4 [TransactionManagerWorker.run] OPEN_TRANSACTION #4
+5 Transaction #6 [TransactionManagerWorker.run] OPEN_TRANSACTION #6
+17 Transaction #9 [TransactionManagerWorker.run] OPEN_TRANSACTION #9
+15 Transaction #1 [TransactionManagerWorker.run] OPEN_TRANSACTION #1
+3 Transaction #5 [TransactionManagerWorker.run] OPEN_TRANSACTION #5
+20 Transaction #3 [TransactionManagerWorker.run] OPEN_TRANSACTION #3
+4 Transaction #12 [TransactionManagerWorker.run] OPEN_TRANSACTION #12
+2 Transaction #7 [TransactionManagerWorker.run] OPEN_TRANSACTION #7
+13 Transaction #14 [TransactionManagerWorker.run] OPEN_TRANSACTION #14
+18 Transaction #8 [TransactionManagerWorker.run] OPEN_TRANSACTION #8
+8 Transaction #18 [TransactionManagerWorker.run] OPEN_TRANSACTION #18
+16 Transaction #17 [TransactionManagerWorker.run] OPEN_TRANSACTION #17
+14 Transaction #2 [TransactionManagerWorker.run] OPEN_TRANSACTION #2
+1 Transaction #13 [TransactionManagerWorker.run] OPEN_TRANSACTION #13
+25 Transaction #6 [TransactionManagerWorker.run] READ_REQUEST >>>>>>>>>>>>>>>>>>>> account #5
+36 Transaction #17 [TransactionManagerWorker.run] READ_REQUEST >>>>>>>>>>>>>>>>>>>> account #0
+21 Transaction #18 [TransactionManagerWorker.run] READ_REQUEST >>>>>>>>>>>>>>>>>>>> account #2
+22 Transaction #1 [TransactionManagerWorker.run] READ_REQUEST >>>>>>>>>>>>>>>>>>>> account #3
+24 Transaction #19 [TransactionManagerWorker.run] READ_REQUEST >>>>>>>>>>>>>>>>>>>> account #9
+23 Transaction #11 [TransactionManagerWorker.run] READ_REQUEST >>>>>>>>>>>>>>>>>>>> account #6
+26 Transaction #20 [TransactionManagerWorker.run] READ_REQUEST >>>>>>>>>>>>>>>>>>>> account #2
+27 Transaction #12 [TransactionManagerWorker.run] READ_REQUEST >>>>>>>>>>>>>>>>>>>> account #4
+28 Transaction #4 [TransactionManagerWorker.run] READ_REQUEST >>>>>>>>>>>>>>>>>>>> account #8
+42 Transaction #11 [TransactionManagerWorker.run] READ_REQUEST <<<<<<<<<<<<<<<<<<<< account #6, balance $10
+29 Transaction #14 [TransactionManagerWorker.run] READ_REQUEST >>>>>>>>>>>>>>>>>>>> account #0
+30 Transaction #13 [TransactionManagerWorker.run] READ_REQUEST >>>>>>>>>>>>>>>>>>>> account #6
+50 Transaction #13 [TransactionManagerWorker.run] READ_REQUEST <<<<<<<<<<<<<<<<<<<< account #6, balance $10
+31 Transaction #8 [TransactionManagerWorker.run] READ_REQUEST >>>>>>>>>>>>>>>>>>>> account #5
+32 Transaction #15 [TransactionManagerWorker.run] READ_REQUEST >>>>>>>>>>>>>>>>>>>> account #0
+33 Transaction #10 [TransactionManagerWorker.run] READ_REQUEST >>>>>>>>>>>>>>>>>>>> account #3
+34 Transaction #2 [TransactionManagerWorker.run] READ_REQUEST >>>>>>>>>>>>>>>>>>>> account #7
+35 Transaction #5 [TransactionManagerWorker.run] READ_REQUEST >>>>>>>>>>>>>>>>>>>> account #1
+37 Transaction #16 [TransactionManagerWorker.run] READ_REQUEST >>>>>>>>>>>>>>>>>>>> account #4
+38 Transaction #7 [TransactionManagerWorker.run] READ_REQUEST >>>>>>>>>>>>>>>>>>>> account #1
+39 Transaction #3 [TransactionManagerWorker.run] READ_REQUEST >>>>>>>>>>>>>>>>>>>> account #7
+40 Transaction #9 [TransactionManagerWorker.run] READ_REQUEST >>>>>>>>>>>>>>>>>>>> account #9
+43 Transaction #1 [TransactionManagerWorker.run] READ_REQUEST <<<<<<<<<<<<<<<<<<<< account #3, balance $10
+41 Transaction #12 [TransactionManagerWorker.run] READ_REQUEST <<<<<<<<<<<<<<<<<<<< account #4, balance $10
+44 Transaction #20 [TransactionManagerWorker.run] READ_REQUEST <<<<<<<<<<<<<<<<<<<< account #2, balance $10
+45 Transaction #4 [TransactionManagerWorker.run] READ_REQUEST <<<<<<<<<<<<<<<<<<<< account #8, balance $10
+64 Transaction #12 [TransactionManagerWorker.run] WRITE_REQUEST >>>>>>>>>>>>>>>>>>> account #4, balance to write $1
+46 Transaction #18 [TransactionManagerWorker.run] READ_REQUEST <<<<<<<<<<<<<<<<<<<< account #2, balance $10
+47 Transaction #19 [TransactionManagerWorker.run] READ_REQUEST <<<<<<<<<<<<<<<<<<<< account #9, balance $10
+48 Transaction #17 [TransactionManagerWorker.run] READ_REQUEST <<<<<<<<<<<<<<<<<<<< account #0, balance $10
+49 Transaction #14 [TransactionManagerWorker.run] READ_REQUEST <<<<<<<<<<<<<<<<<<<< account #0, balance $10
+70 Transaction #17 [TransactionManagerWorker.run] WRITE_REQUEST >>>>>>>>>>>>>>>>>>> account #0, balance to write $1
+51 Transaction #11 [TransactionManagerWorker.run] WRITE_REQUEST >>>>>>>>>>>>>>>>>>> account #6, balance to write $4
+73 Transaction #11 [TransactionManagerWorker.run] WRITE_REQUEST <<<<<<<<<<<<<<<<<<<< account #6, wrote $4
+52 Transaction #6 [TransactionManagerWorker.run] READ_REQUEST <<<<<<<<<<<<<<<<<<<< account #5, balance $10
+74 Transaction #11 [TransactionManagerWorker.run] READ_REQUEST >>>>>>>>>>>>>>>>>>>> account #4
+53 Transaction #8 [TransactionManagerWorker.run] READ_REQUEST <<<<<<<<<<<<<<<<<<<< account #5, balance $10
+54 Transaction #13 [TransactionManagerWorker.run] WRITE_REQUEST >>>>>>>>>>>>>>>>>>> account #6, balance to write $9
+55 Transaction #15 [TransactionManagerWorker.run] READ_REQUEST <<<<<<<<<<<<<<<<<<<< account #0, balance $10
+56 Transaction #10 [TransactionManagerWorker.run] READ_REQUEST <<<<<<<<<<<<<<<<<<<< account #3, balance $10
+57 Transaction #2 [TransactionManagerWorker.run] READ_REQUEST <<<<<<<<<<<<<<<<<<<< account #7, balance $10
+79 Transaction #15 [TransactionManagerWorker.run] WRITE_REQUEST >>>>>>>>>>>>>>>>>>> account #0, balance to write $6
+58 Transaction #5 [TransactionManagerWorker.run] READ_REQUEST <<<<<<<<<<<<<<<<<<<< account #1, balance $10
+59 Transaction #16 [TransactionManagerWorker.run] READ_REQUEST <<<<<<<<<<<<<<<<<<<< account #4, balance $10
+60 Transaction #7 [TransactionManagerWorker.run] READ_REQUEST <<<<<<<<<<<<<<<<<<<< account #1, balance $10
+61 Transaction #3 [TransactionManagerWorker.run] READ_REQUEST <<<<<<<<<<<<<<<<<<<< account #7, balance $10
+62 Transaction #9 [TransactionManagerWorker.run] READ_REQUEST <<<<<<<<<<<<<<<<<<<< account #9, balance $10
+63 Transaction #1 [TransactionManagerWorker.run] WRITE_REQUEST >>>>>>>>>>>>>>>>>>> account #3, balance to write $4
+65 Transaction #20 [TransactionManagerWorker.run] WRITE_REQUEST >>>>>>>>>>>>>>>>>>> account #2, balance to write $6
+66 Transaction #4 [TransactionManagerWorker.run] WRITE_REQUEST >>>>>>>>>>>>>>>>>>> account #8, balance to write $6
+67 Transaction #18 [TransactionManagerWorker.run] WRITE_REQUEST >>>>>>>>>>>>>>>>>>> account #2, balance to write $0
+68 Transaction #12 [TransactionManagerWorker.run] WRITE_REQUEST <<<<<<<<<<<<<<<<<<<< account #4, wrote $1
+69 Transaction #19 [TransactionManagerWorker.run] WRITE_REQUEST >>>>>>>>>>>>>>>>>>> account #9, balance to write $4
+92 Transaction #12 [TransactionManagerWorker.run] READ_REQUEST >>>>>>>>>>>>>>>>>>>> account #0
+71 Transaction #14 [TransactionManagerWorker.run] WRITE_REQUEST >>>>>>>>>>>>>>>>>>> account #0, balance to write $5
+72 Transaction #17 [TransactionManagerWorker.run] WRITE_REQUEST <<<<<<<<<<<<<<<<<<<< account #0, wrote $1
+75 Transaction #6 [TransactionManagerWorker.run] WRITE_REQUEST >>>>>>>>>>>>>>>>>>> account #5, balance to write $7
+76 Transaction #11 [TransactionManagerWorker.run] READ_REQUEST <<<<<<<<<<<<<<<<<<<< account #4, balance $1
+77 Transaction #8 [TransactionManagerWorker.run] WRITE_REQUEST >>>>>>>>>>>>>>>>>>> account #5, balance to write $9
+98 Transaction #11 [TransactionManagerWorker.run] WRITE_REQUEST >>>>>>>>>>>>>>>>>>> account #4, balance to write $7
+78 Transaction #13 [TransactionManagerWorker.run] WRITE_REQUEST <<<<<<<<<<<<<<<<<<<< account #6, wrote $9
+80 Transaction #10 [TransactionManagerWorker.run] WRITE_REQUEST >>>>>>>>>>>>>>>>>>> account #3, balance to write $0
+81 Transaction #2 [TransactionManagerWorker.run] WRITE_REQUEST >>>>>>>>>>>>>>>>>>> account #7, balance to write $3
+82 Transaction #15 [TransactionManagerWorker.run] WRITE_REQUEST <<<<<<<<<<<<<<<<<<<< account #0, wrote $6
+83 Transaction #5 [TransactionManagerWorker.run] WRITE_REQUEST >>>>>>>>>>>>>>>>>>> account #1, balance to write $4
+84 Transaction #7 [TransactionManagerWorker.run] WRITE_REQUEST >>>>>>>>>>>>>>>>>>> account #1, balance to write $8
+85 Transaction #16 [TransactionManagerWorker.run] WRITE_REQUEST >>>>>>>>>>>>>>>>>>> account #4, balance to write $7
+86 Transaction #3 [TransactionManagerWorker.run] WRITE_REQUEST >>>>>>>>>>>>>>>>>>> account #7, balance to write $4
+87 Transaction #9 [TransactionManagerWorker.run] WRITE_REQUEST >>>>>>>>>>>>>>>>>>> account #9, balance to write $8
+88 Transaction #1 [TransactionManagerWorker.run] WRITE_REQUEST <<<<<<<<<<<<<<<<<<<< account #3, wrote $4
+89 Transaction #20 [TransactionManagerWorker.run] WRITE_REQUEST <<<<<<<<<<<<<<<<<<<< account #2, wrote $6
+90 Transaction #4 [TransactionManagerWorker.run] WRITE_REQUEST <<<<<<<<<<<<<<<<<<<< account #8, wrote $6
+91 Transaction #18 [TransactionManagerWorker.run] WRITE_REQUEST <<<<<<<<<<<<<<<<<<<< account #2, wrote $0
+112 Transaction #4 [TransactionManagerWorker.run] READ_REQUEST >>>>>>>>>>>>>>>>>>>> account #3
+113 Transaction #18 [TransactionManagerWorker.run] READ_REQUEST >>>>>>>>>>>>>>>>>>>> account #6
+93 Transaction #19 [TransactionManagerWorker.run] WRITE_REQUEST <<<<<<<<<<<<<<<<<<<< account #9, wrote $4
+94 Transaction #12 [TransactionManagerWorker.run] READ_REQUEST <<<<<<<<<<<<<<<<<<<< account #0, balance $6
+95 Transaction #14 [TransactionManagerWorker.run] WRITE_REQUEST <<<<<<<<<<<<<<<<<<<< account #0, wrote $5
+96 Transaction #17 [TransactionManagerWorker.run] READ_REQUEST >>>>>>>>>>>>>>>>>>>> account #3
+97 Transaction #6 [TransactionManagerWorker.run] WRITE_REQUEST <<<<<<<<<<<<<<<<<<<< account #5, wrote $7
+99 Transaction #8 [TransactionManagerWorker.run] WRITE_REQUEST <<<<<<<<<<<<<<<<<<<< account #5, wrote $9
+120 Transaction #6 [TransactionManagerWorker.run] READ_REQUEST >>>>>>>>>>>>>>>>>>>> account #8
+100 Transaction #11 [TransactionManagerWorker.run] WRITE_REQUEST <<<<<<<<<<<<<<<<<<<< account #4, wrote $7
+101 Transaction #13 [TransactionManagerWorker.run] READ_REQUEST >>>>>>>>>>>>>>>>>>>> account #7
+102 Transaction #10 [TransactionManagerWorker.run] WRITE_REQUEST <<<<<<<<<<<<<<<<<<<< account #3, wrote $0
+103 Transaction #2 [TransactionManagerWorker.run] WRITE_REQUEST <<<<<<<<<<<<<<<<<<<< account #7, wrote $3
+104 Transaction #15 [TransactionManagerWorker.run] READ_REQUEST >>>>>>>>>>>>>>>>>>>> account #1
+105 Transaction #5 [TransactionManagerWorker.run] WRITE_REQUEST <<<<<<<<<<<<<<<<<<<< account #1, wrote $4
+106 Transaction #7 [TransactionManagerWorker.run] WRITE_REQUEST <<<<<<<<<<<<<<<<<<<< account #1, wrote $8
+127 Transaction #5 [TransactionManagerWorker.run] READ_REQUEST >>>>>>>>>>>>>>>>>>>> account #5
+128 Transaction #7 [TransactionManagerWorker.run] READ_REQUEST >>>>>>>>>>>>>>>>>>>> account #4
+129 Transaction #5 [TransactionManagerWorker.run] READ_REQUEST <<<<<<<<<<<<<<<<<<<< account #5, balance $9
+107 Transaction #16 [TransactionManagerWorker.run] WRITE_REQUEST <<<<<<<<<<<<<<<<<<<< account #4, wrote $7
+131 Transaction #5 [TransactionManagerWorker.run] WRITE_REQUEST >>>>>>>>>>>>>>>>>>> account #5, balance to write $15
+108 Transaction #3 [TransactionManagerWorker.run] WRITE_REQUEST <<<<<<<<<<<<<<<<<<<< account #7, wrote $4
+133 Transaction #5 [TransactionManagerWorker.run] WRITE_REQUEST <<<<<<<<<<<<<<<<<<<< account #5, wrote $15
+109 Transaction #9 [TransactionManagerWorker.run] WRITE_REQUEST <<<<<<<<<<<<<<<<<<<< account #9, wrote $8
+110 Transaction #1 [TransactionManagerWorker.run] READ_REQUEST >>>>>>>>>>>>>>>>>>>> account #8
+111 Transaction #20 [TransactionManagerWorker.run] READ_REQUEST >>>>>>>>>>>>>>>>>>>> account #9
+137 Transaction #1 [TransactionManagerWorker.run] READ_REQUEST <<<<<<<<<<<<<<<<<<<< account #8, balance $6
+114 Transaction #4 [TransactionManagerWorker.run] READ_REQUEST <<<<<<<<<<<<<<<<<<<< account #3, balance $0
+115 Transaction #18 [TransactionManagerWorker.run] READ_REQUEST <<<<<<<<<<<<<<<<<<<< account #6, balance $9
+140 Transaction #4 [TransactionManagerWorker.run] WRITE_REQUEST >>>>>>>>>>>>>>>>>>> account #3, balance to write $4
+116 Transaction #19 [TransactionManagerWorker.run] READ_REQUEST >>>>>>>>>>>>>>>>>>>> account #1
+117 Transaction #12 [TransactionManagerWorker.run] WRITE_REQUEST >>>>>>>>>>>>>>>>>>> account #0, balance to write $15
+118 Transaction #14 [TransactionManagerWorker.run] READ_REQUEST >>>>>>>>>>>>>>>>>>>> account #1
+119 Transaction #17 [TransactionManagerWorker.run] READ_REQUEST <<<<<<<<<<<<<<<<<<<< account #3, balance $0
+121 Transaction #8 [TransactionManagerWorker.run] READ_REQUEST >>>>>>>>>>>>>>>>>>>> account #6
+122 Transaction #6 [TransactionManagerWorker.run] READ_REQUEST <<<<<<<<<<<<<<<<<<<< account #8, balance $6
+123 Transaction #13 [TransactionManagerWorker.run] READ_REQUEST <<<<<<<<<<<<<<<<<<<< account #7, balance $4
+148 Transaction #6 [TransactionManagerWorker.run] WRITE_REQUEST >>>>>>>>>>>>>>>>>>> account #8, balance to write $9
+124 Transaction #10 [TransactionManagerWorker.run] READ_REQUEST >>>>>>>>>>>>>>>>>>>> account #5
+125 Transaction #2 [TransactionManagerWorker.run] READ_REQUEST >>>>>>>>>>>>>>>>>>>> account #6
+126 Transaction #15 [TransactionManagerWorker.run] READ_REQUEST <<<<<<<<<<<<<<<<<<<< account #1, balance $8
+130 Transaction #7 [TransactionManagerWorker.run] READ_REQUEST <<<<<<<<<<<<<<<<<<<< account #4, balance $7
+132 Transaction #16 [TransactionManagerWorker.run] READ_REQUEST >>>>>>>>>>>>>>>>>>>> account #2
+134 Transaction #3 [TransactionManagerWorker.run] READ_REQUEST >>>>>>>>>>>>>>>>>>>> account #6
+135 Transaction #11 [TransactionManager.validateTransaction] Transaction #11 successfully validated
+136 Transaction #9 [TransactionManagerWorker.run] READ_REQUEST >>>>>>>>>>>>>>>>>>>> account #9
+138 Transaction #20 [TransactionManagerWorker.run] READ_REQUEST <<<<<<<<<<<<<<<<<<<< account #9, balance $8
+139 Transaction #1 [TransactionManagerWorker.run] WRITE_REQUEST >>>>>>>>>>>>>>>>>>> account #8, balance to write $12
+141 Transaction #18 [TransactionManagerWorker.run] WRITE_REQUEST >>>>>>>>>>>>>>>>>>> account #6, balance to write $19
+142 Transaction #4 [TransactionManagerWorker.run] WRITE_REQUEST <<<<<<<<<<<<<<<<<<<< account #3, wrote $4
+143 Transaction #19 [TransactionManagerWorker.run] READ_REQUEST <<<<<<<<<<<<<<<<<<<< account #1, balance $8
+144 Transaction #12 [TransactionManagerWorker.run] WRITE_REQUEST <<<<<<<<<<<<<<<<<<<< account #0, wrote $15
+145 Transaction #14 [TransactionManagerWorker.run] READ_REQUEST <<<<<<<<<<<<<<<<<<<< account #1, balance $8
+146 Transaction #17 [TransactionManagerWorker.run] WRITE_REQUEST >>>>>>>>>>>>>>>>>>> account #3, balance to write $9
+147 Transaction #8 [TransactionManagerWorker.run] READ_REQUEST <<<<<<<<<<<<<<<<<<<< account #6, balance $9
+149 Transaction #13 [TransactionManagerWorker.run] WRITE_REQUEST >>>>>>>>>>>>>>>>>>> account #7, balance to write $5
+150 Transaction #6 [TransactionManagerWorker.run] WRITE_REQUEST <<<<<<<<<<<<<<<<<<<< account #8, wrote $9
+151 Transaction #10 [TransactionManagerWorker.run] READ_REQUEST <<<<<<<<<<<<<<<<<<<< account #5, balance $15
+152 Transaction #2 [TransactionManagerWorker.run] READ_REQUEST <<<<<<<<<<<<<<<<<<<< account #6, balance $9
+153 Transaction #15 [TransactionManagerWorker.run] WRITE_REQUEST >>>>>>>>>>>>>>>>>>> account #1, balance to write $12
+154 Transaction #7 [TransactionManagerWorker.run] WRITE_REQUEST >>>>>>>>>>>>>>>>>>> account #4, balance to write $9
+155 Transaction #16 [TransactionManagerWorker.run] READ_REQUEST <<<<<<<<<<<<<<<<<<<< account #2, balance $0
+156 Transaction #3 [TransactionManagerWorker.run] READ_REQUEST <<<<<<<<<<<<<<<<<<<< account #6, balance $9
+157 Transaction #9 [TransactionManagerWorker.run] READ_REQUEST <<<<<<<<<<<<<<<<<<<< account #9, balance $8
+158 Transaction #20 [TransactionManagerWorker.run] WRITE_REQUEST >>>>>>>>>>>>>>>>>>> account #9, balance to write $12
+159 Transaction #1 [TransactionManagerWorker.run] WRITE_REQUEST <<<<<<<<<<<<<<<<<<<< account #8, wrote $12
+160 Transaction #11 [TransactionManagerWorker.run] CLOSE_TRANSACTION #11 - COMMITTED
+161 Transaction #18 [TransactionManagerWorker.run] WRITE_REQUEST <<<<<<<<<<<<<<<<<<<< account #6, wrote $19
+162 Transaction #19 [TransactionManagerWorker.run] WRITE_REQUEST >>>>>>>>>>>>>>>>>>> account #1, balance to write $14
+163 Transaction #14 [TransactionManagerWorker.run] WRITE_REQUEST >>>>>>>>>>>>>>>>>>> account #1, balance to write $13
+164 Transaction #17 [TransactionManagerWorker.run] WRITE_REQUEST <<<<<<<<<<<<<<<<<<<< account #3, wrote $9
+166 Transaction #13 [TransactionManagerWorker.run] WRITE_REQUEST <<<<<<<<<<<<<<<<<<<< account #7, wrote $5
+165 Transaction #8 [TransactionManagerWorker.run] WRITE_REQUEST >>>>>>>>>>>>>>>>>>> account #6, balance to write $10
+167 Transaction #10 [TransactionManagerWorker.run] WRITE_REQUEST >>>>>>>>>>>>>>>>>>> account #5, balance to write $25
+168 Transaction #2 [TransactionManagerWorker.run] WRITE_REQUEST >>>>>>>>>>>>>>>>>>> account #6, balance to write $16
+169 Transaction #15 [TransactionManagerWorker.run] WRITE_REQUEST <<<<<<<<<<<<<<<<<<<< account #1, wrote $12
+170 Transaction #7 [TransactionManagerWorker.run] WRITE_REQUEST <<<<<<<<<<<<<<<<<<<< account #4, wrote $9
+171 Transaction #16 [TransactionManagerWorker.run] WRITE_REQUEST >>>>>>>>>>>>>>>>>>> account #2, balance to write $3
+172 Transaction #3 [TransactionManagerWorker.run] WRITE_REQUEST >>>>>>>>>>>>>>>>>>> account #6, balance to write $15
+173 Transaction #9 [TransactionManagerWorker.run] WRITE_REQUEST >>>>>>>>>>>>>>>>>>> account #9, balance to write $10
+174 Transaction #20 [TransactionManagerWorker.run] WRITE_REQUEST <<<<<<<<<<<<<<<<<<<< account #9, wrote $12
+175 Transaction #1 [TransactionManager.validateTransaction] Transaction #1 successfully validated
+176 Transaction #19 [TransactionManagerWorker.run] WRITE_REQUEST <<<<<<<<<<<<<<<<<<<< account #1, wrote $14
+184 Transaction #1 [TransactionManagerWorker.run] CLOSE_TRANSACTION #1 - COMMITTED
+177 Transaction #14 [TransactionManagerWorker.run] WRITE_REQUEST <<<<<<<<<<<<<<<<<<<< account #1, wrote $13
+178 Transaction #8 [TransactionManagerWorker.run] WRITE_REQUEST <<<<<<<<<<<<<<<<<<<< account #6, wrote $10
+179 Transaction #10 [TransactionManagerWorker.run] WRITE_REQUEST <<<<<<<<<<<<<<<<<<<< account #5, wrote $25
+180 Transaction #2 [TransactionManagerWorker.run] WRITE_REQUEST <<<<<<<<<<<<<<<<<<<< account #6, wrote $16
+181 Transaction #16 [TransactionManagerWorker.run] WRITE_REQUEST <<<<<<<<<<<<<<<<<<<< account #2, wrote $3
+182 Transaction #3 [TransactionManagerWorker.run] WRITE_REQUEST <<<<<<<<<<<<<<<<<<<< account #6, wrote $15
+183 Transaction #9 [TransactionManagerWorker.run] WRITE_REQUEST <<<<<<<<<<<<<<<<<<<< account #9, wrote $10
+185 Transaction #6 [TransactionManager.validateTransaction] Transaction #6 successfully validated
+186 Transaction #6 [TransactionManagerWorker.run] CLOSE_TRANSACTION #6 - COMMITTED
+187 Transaction #12 [TransactionManager.validateTransaction] Transaction #12 successfully validated
+188 Transaction #12 [TransactionManagerWorker.run] CLOSE_TRANSACTION #12 - COMMITTED
+189 Transaction #4 [TransactionManager.validateTransaction] Transaction #4 successfully validated
+190 Transaction #4 [TransactionManagerWorker.run] CLOSE_TRANSACTION #4 - COMMITTED
+191 Transaction #5 [TransactionManager.validateTransaction] Transaction #5 successfully validated
+192 Transaction #5 [TransactionManagerWorker.run] CLOSE_TRANSACTION #5 - COMMITTED
+193 Transaction #9 [TransactionManager.validateTransaction] Transaction #9 successfully validated
+194 Transaction #9 [TransactionManagerWorker.run] CLOSE_TRANSACTION #9 - COMMITTED
+195 Transaction #3 [TransactionManager.validateTransaction] Transaction #3 successfully validated
+196 Transaction #3 [TransactionManagerWorker.run] CLOSE_TRANSACTION #3 - COMMITTED
+197 Transaction #16 [TransactionManager.validateTransaction] Transaction #16 successfully validated
+198 Transaction #16 [TransactionManagerWorker.run] CLOSE_TRANSACTION #16 - COMMITTED
+199 Transaction #2 [TransactionManager.validateTransaction] Transaction #2 successfully validated
+200 Transaction #2 [TransactionManagerWorker.run] CLOSE_TRANSACTION #2 - COMMITTED
+201 Transaction #10 [TransactionManager.validateTransaction] Transaction #10 successfully validated
+202 Transaction #10 [TransactionManagerWorker.run] CLOSE_TRANSACTION #10 - COMMITTED
+203 Transaction #8 [TransactionManager.validateTransaction] Transaction #8 successfully validated
+204 Transaction #8 [TransactionManagerWorker.run] CLOSE_TRANSACTION #8 - COMMITTED
+205 Transaction #14 [TransactionManager.validateTransaction] Transaction #14 successfully validated
+206 Transaction #14 [TransactionManagerWorker.run] CLOSE_TRANSACTION #14 - COMMITTED
+207 Transaction #19 [TransactionManager.validateTransaction] Transaction #19 successfully validated
+208 Transaction #19 [TransactionManagerWorker.run] CLOSE_TRANSACTION #19 - COMMITTED
+209 Transaction #20 [TransactionManager.validateTransaction] Transaction #20 successfully validated
+210 Transaction #20 [TransactionManagerWorker.run] CLOSE_TRANSACTION #20 - COMMITTED
+211 Transaction #7 [TransactionManager.validateTransaction] Transaction #7 successfully validated
+212 Transaction #7 [TransactionManagerWorker.run] CLOSE_TRANSACTION #7 - COMMITTED
+213 Transaction #15 [TransactionManager.validateTransaction] Transaction #15 successfully validated
+214 Transaction #15 [TransactionManagerWorker.run] CLOSE_TRANSACTION #15 - COMMITTED
+215 Transaction #13 [TransactionManager.validateTransaction] Transaction #13 successfully validated
+216 Transaction #13 [TransactionManagerWorker.run] CLOSE_TRANSACTION #13 - COMMITTED
+217 Transaction #17 [TransactionManager.validateTransaction] Transaction #17 successfully validated
+218 Transaction #17 [TransactionManagerWorker.run] CLOSE_TRANSACTION #17 - COMMITTED
+219 Transaction #18 [TransactionManager.validateTransaction] Transaction #18 successfully validated
+220 Transaction #18 [TransactionManagerWorker.run] CLOSE_TRANSACTION #18 - COMMITTED
+[TransactionServer.run] Socket closed, shutting down ...
+
+
+======================================= BRANCH TOTAL =======================================
+0:15$ 1:13$ 2:3$ 3:9$ 4:9$ 5:25$ 6:15$ 7:5$ 8:12$ 9:10$ ---> $116
+
