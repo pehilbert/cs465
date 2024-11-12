@@ -3,44 +3,152 @@ Properties Summary
         PORT:               8181
         NUMBER_ACCOUNTS:    10
         NUMBER_TRANSACTIONS:20
-Transaction #19 started, transfer $6: 9->1
-Transaction #13 started, transfer $1: 6->7
-Transaction #18 started, transfer $10: 2->6
-Transaction #9 started, transfer $2: 9->9
-Transaction #20 started, transfer $4: 2->9
-Transaction #4 started, transfer $4: 8->3
-Transaction #15 started, transfer $4: 0->1
-Transaction #2 started, transfer $7: 7->6
-Transaction #3 started, transfer $6: 7->6
-Transaction #14 started, transfer $5: 0->1
-Transaction #10 started, transfer $10: 3->5
-Transaction #8 started, transfer $1: 5->6
-Transaction #17 started, transfer $9: 0->3
-Transaction #6 started, transfer $3: 5->8
-Transaction #7 started, transfer $2: 1->4
-Transaction #1 started, transfer $6: 3->8
-Transaction #16 started, transfer $3: 4->2
-Transaction #11 started, transfer $6: 6->4
-Transaction #12 started, transfer $9: 4->0
-Transaction #5 started, transfer $6: 1->5
-Transaction #11 COMMITTED
-Transaction #1 COMMITTED
-Transaction #6 COMMITTED
-Transaction #12 COMMITTED
-Transaction #4 COMMITTED
-Transaction #5 COMMITTED
-Transaction #9 COMMITTED
-Transaction #3 COMMITTED
-Transaction #16 COMMITTED
-Transaction #2 COMMITTED
-Transaction #10 COMMITTED
-Transaction #8 COMMITTED
-Transaction #14 COMMITTED
-Transaction #19 COMMITTED
-Transaction #20 COMMITTED
-Transaction #7 COMMITTED
-Transaction #15 COMMITTED
-Transaction #13 COMMITTED
-Transaction #17 COMMITTED
+Transaction #14 started, transfer $2: 6->4
+Transaction #20 started, transfer $3: 3->9
+Transaction #9 started, transfer $1: 3->2
+Transaction #18 started, transfer $9: 5->1
+Transaction #7 started, transfer $5: 3->9
+Transaction #2 started, transfer $6: 9->0
+Transaction #8 started, transfer $6: 2->5
+Transaction #19 started, transfer $8: 6->7
+Transaction #12 started, transfer $1: 8->3
+Transaction #4 started, transfer $7: 5->5
+Transaction #15 started, transfer $2: 3->2
+Transaction #13 started, transfer $2: 3->4
+Transaction #10 started, transfer $4: 4->2
+Transaction #3 started, transfer $9: 4->1
+Transaction #16 started, transfer $9: 9->8
+Transaction #17 started, transfer $3: 3->9
+Transaction #11 started, transfer $3: 5->3
+Transaction #6 started, transfer $7: 1->9
+Transaction #5 started, transfer $5: 3->1
+Transaction #1 started, transfer $1: 8->4
 Transaction #18 COMMITTED
+        Transaction #3 ABORTED
+Transaction #1 COMMITTED
+Transaction #15 COMMITTED
+        Transaction #13 ABORTED
+        Transaction #17 ABORTED
+        Transaction #14 ABORTED
+        Transaction #9 ABORTED
+        Transaction #6 ABORTED
+        Transaction #16 ABORTED
+        Transaction #10 ABORTED
+        Transaction #4 ABORTED
+        Transaction #5 ABORTED
+        Transaction #8 ABORTED
+        Transaction #12 ABORTED
+        Transaction #20 ABORTED
+Transaction #2 COMMITTED
+        Transaction #7 ABORTED
+        Transaction #11 ABORTED
+Transaction #19 COMMITTED
+                Prior transaction #16 RESTARTED as transaction #25, transfer $9: 9->8
+                Prior transaction #13 RESTARTED as transaction #21, transfer $2: 3->4
+                Prior transaction #10 RESTARTED as transaction #26, transfer $4: 4->2
+                Prior transaction #4 RESTARTED as transaction #27, transfer $7: 5->5
+                Prior transaction #20 RESTARTED as transaction #24, transfer $3: 3->9
+                Prior transaction #5 RESTARTED as transaction #23, transfer $5: 3->1
+                Prior transaction #3 RESTARTED as transaction #28, transfer $9: 4->1
+                Prior transaction #6 RESTARTED as transaction #30, transfer $7: 1->9
+                Prior transaction #12 RESTARTED as transaction #22, transfer $1: 8->3
+                Prior transaction #14 RESTARTED as transaction #31, transfer $2: 6->4
+                Prior transaction #17 RESTARTED as transaction #29, transfer $3: 3->9
+                Prior transaction #9 RESTARTED as transaction #32, transfer $1: 3->2
+                Prior transaction #8 RESTARTED as transaction #33, transfer $6: 2->5
+                Prior transaction #7 RESTARTED as transaction #34, transfer $5: 3->9
+                Prior transaction #11 RESTARTED as transaction #35, transfer $3: 5->3
+Transaction #22 COMMITTED
+Transaction #33 COMMITTED
+Transaction #30 COMMITTED
+        Transaction #25 ABORTED
+        Transaction #24 ABORTED
+        Transaction #34 ABORTED
+        Transaction #31 ABORTED
+        Transaction #32 ABORTED
+        Transaction #29 ABORTED
+        Transaction #27 ABORTED
+        Transaction #26 ABORTED
+        Transaction #23 ABORTED
+        Transaction #28 ABORTED
+        Transaction #21 ABORTED
+                Prior transaction #24 RESTARTED as transaction #37, transfer $3: 3->9
+                Prior transaction #25 RESTARTED as transaction #36, transfer $9: 9->8
+        Transaction #35 ABORTED
+                Prior transaction #34 RESTARTED as transaction #38, transfer $5: 3->9
+                Prior transaction #29 RESTARTED as transaction #39, transfer $3: 3->9
+                Prior transaction #27 RESTARTED as transaction #40, transfer $7: 5->5
+                Prior transaction #32 RESTARTED as transaction #41, transfer $1: 3->2
+                Prior transaction #26 RESTARTED as transaction #42, transfer $4: 4->2
+                Prior transaction #31 RESTARTED as transaction #43, transfer $2: 6->4
+                Prior transaction #23 RESTARTED as transaction #45, transfer $5: 3->1
+                Prior transaction #28 RESTARTED as transaction #44, transfer $9: 4->1
+                Prior transaction #35 RESTARTED as transaction #46, transfer $3: 5->3
+                Prior transaction #21 RESTARTED as transaction #47, transfer $2: 3->4
+Transaction #37 COMMITTED
+        Transaction #36 ABORTED
+        Transaction #38 ABORTED
+        Transaction #39 ABORTED
+        Transaction #47 ABORTED
+Transaction #42 COMMITTED
+        Transaction #46 ABORTED
+Transaction #40 COMMITTED
+        Transaction #43 ABORTED
+                Prior transaction #39 RESTARTED as transaction #48, transfer $3: 3->9
+                Prior transaction #38 RESTARTED as transaction #49, transfer $5: 3->9
+        Transaction #45 ABORTED
+        Transaction #44 ABORTED
+                Prior transaction #36 RESTARTED as transaction #50, transfer $9: 9->8
+        Transaction #41 ABORTED
+                Prior transaction #43 RESTARTED as transaction #51, transfer $2: 6->4
+                Prior transaction #47 RESTARTED as transaction #52, transfer $2: 3->4
+                Prior transaction #46 RESTARTED as transaction #53, transfer $3: 5->3
+                Prior transaction #45 RESTARTED as transaction #54, transfer $5: 3->1
+                Prior transaction #44 RESTARTED as transaction #55, transfer $9: 4->1
+                Prior transaction #41 RESTARTED as transaction #56, transfer $1: 3->2
+Transaction #49 COMMITTED
+        Transaction #48 ABORTED
+Transaction #51 COMMITTED
+        Transaction #56 ABORTED
+        Transaction #54 ABORTED
+        Transaction #55 ABORTED
+        Transaction #53 ABORTED
+        Transaction #50 ABORTED
+        Transaction #52 ABORTED
+                Prior transaction #48 RESTARTED as transaction #57, transfer $3: 3->9
+                Prior transaction #56 RESTARTED as transaction #58, transfer $1: 3->2
+Transaction #57 COMMITTED
+                Prior transaction #53 RESTARTED as transaction #59, transfer $3: 5->3
+                Prior transaction #50 RESTARTED as transaction #60, transfer $9: 9->8
+                Prior transaction #54 RESTARTED as transaction #61, transfer $5: 3->1
+                Prior transaction #55 RESTARTED as transaction #62, transfer $9: 4->1
+                Prior transaction #52 RESTARTED as transaction #63, transfer $2: 3->4
+        Transaction #58 ABORTED
+        Transaction #60 ABORTED
+        Transaction #59 ABORTED
+Transaction #62 COMMITTED
+        Transaction #61 ABORTED
+        Transaction #63 ABORTED
+                Prior transaction #58 RESTARTED as transaction #64, transfer $1: 3->2
+                Prior transaction #60 RESTARTED as transaction #65, transfer $9: 9->8
+                Prior transaction #59 RESTARTED as transaction #66, transfer $3: 5->3
+                Prior transaction #61 RESTARTED as transaction #67, transfer $5: 3->1
+                Prior transaction #63 RESTARTED as transaction #68, transfer $2: 3->4
+Transaction #64 COMMITTED
+Transaction #65 COMMITTED
+        Transaction #66 ABORTED
+        Transaction #67 ABORTED
+        Transaction #68 ABORTED
+                Prior transaction #66 RESTARTED as transaction #69, transfer $3: 5->3
+                Prior transaction #68 RESTARTED as transaction #71, transfer $2: 3->4
+                Prior transaction #67 RESTARTED as transaction #70, transfer $5: 3->1
+Transaction #69 COMMITTED
+        Transaction #70 ABORTED
+        Transaction #71 ABORTED
+                Prior transaction #70 RESTARTED as transaction #72, transfer $5: 3->1
+                Prior transaction #71 RESTARTED as transaction #73, transfer $2: 3->4
+Transaction #72 COMMITTED
+        Transaction #73 ABORTED
+                Prior transaction #73 RESTARTED as transaction #74, transfer $2: 3->4
+Transaction #74 COMMITTED
 ============================================================= WE ARE DONE, SHUTTING DOWN =============================================================

@@ -72,7 +72,7 @@ public class Transaction {
         // put <accountNumber, newBalance> in writeSet
         // possibly overwriting a prior write
         // ...
-        TransactionServer.accountManager.write(accountNumber,newBalance);
+        writeSet.put(accountNumber, newBalance);
 
         return oldBalance;
 	}
